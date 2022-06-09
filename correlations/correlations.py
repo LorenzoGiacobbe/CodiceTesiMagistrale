@@ -11,6 +11,32 @@ def diff(s1, s2):
 		if s1[i] != s2[i]:
 			count = count +1
 	return count
+	
+def legends():
+	legends = list()
+
+	# legend for input tables
+	fields = list()
+	expl = list()
+	
+	fields.append("Old values")
+	expl.append("old values of the inputs before the new inputs are passed (a b r0 r1). E.g. 0110 represents a=0, b=1, r0=1, r1=0")
+	fields.append("New values")
+	expl.append("old values of the inputs (a b r0 r1). E.g. 0110 represents a=0, b=1, r0=1, r1=0")
+	fields.append("AB change ID")
+	expl.append("Unique ID for each different change of the old values of a and b")
+	fields.append("Input change ID")
+	expl.append("Unique ID for each different change of the old values of all inputs")
+	fields.append("Hamming distance")
+	expl.append("Hamming distance between old and new values of the inputs")
+	fields.append("Toggles")
+	expl.append("Number of toggles the output performs transitioning from the old to the new values")
+	
+	df = pd.DataFrame(data = {"Field": fields, "Explanation": expl})
+	legends.append(df)
+
+
+	return legends
 
 # User interaction
 def get_inputs():
@@ -74,7 +100,7 @@ def create_corr_table(log):
 	t_len = math.sqrt(len(toggles))
 	inputs = create_input_list(int(t_len))
 
-	data = {"starting input": inputs[0], "new input": inputs[1], "passaggio ab": inputs[2], "passaggio ID": inputs[3], "diff bits": inputs[4], "number of toggles": toggles}
+	data = {"Old values": inputs[0], "New values": inputs[1], "AB change ID": inputs[2], "Input change ID": inputs[3], "Hamming distance": inputs[4], "Toggles": toggles}
 
 	df = pd.DataFrame(data = data)
 
@@ -139,8 +165,11 @@ if __name__ == "__main__":
 	with pd.ExcelWriter("./spreadsheets/" + spreadsheet + ".xlsx") as writer:
 		# write starting tables on excel workbook
 		df.to_excel(writer, index=False, sheet_name="Without delays")
+		legends()[0].to_excel(writer, index=False, sheet_name="Without delays", startrow=0, startcol=8)
 		df_del.to_excel(writer, index=False, sheet_name="Gate delays")
+		legends()[0].to_excel(writer, index=False, sheet_name="Without delays", startrow=0, startcol=8)
 		df_in_del.to_excel(writer, index=False, sheet_name="Gate+input delays")
+		legends()[0].to_excel(writer, index=False, sheet_name="Without delays", startrow=0, startcol=8)
 		
 		# write correlation table for transition from old to new state of all inputs
 		corr_tables = pearsons_correlation(df, df_del, df_in_del, 3, 5)
