@@ -5,11 +5,32 @@ import sys
 import os
 import math
 
+def hamming_distance(i1, i2):
+	x = i1 ^ i2
+	hd = 0
+	
+	while(x > 0):
+		hd += x & 1
+		x >>= 1
+	
+	return hd
+
+def xor_str(s1, s2):
+	x = tuple(a^b for a,b in zip(bytes(s1, encoding='utf8'), bytes(s2, encoding='utf8')))
+
+	return int.from_bytes(bytes(x), 'big')
+
+def my_xor(i1, i2):
+	return i1 ^ i2
+	
+def my_and(i1, i2):
+	return i1 & i2
+
 def diff(s1, s2):
 	count = 0
 	for i in range(len(s1)):
 		if s1[i] != s2[i]:
-			count = count +1
+			count = count + 1
 	return count
 	
 def legends():
@@ -76,9 +97,11 @@ def create_input_list(len):
 	il = list()
 	pre = list()
 	post = list()
-	ab = list()
-	bit_diff = list()
-	passaggio = list()
+	x = list()
+	
+	#ab = list()
+	#bit_diff = list()
+	#passaggio = list()
 
 	for i in range(0, len):
 		s = format(i, '04b')
@@ -86,13 +109,50 @@ def create_input_list(len):
 
 	for i in range(len):
 		for j in range(len):
+			pre_a = int(il[i][0])
+			pre_b = int(il[i][1])
+			post_a = int(il[j][0])
+			post_b = int(il[j][1])
+			#post_r1 = int(il[j][2])
+			#post_r2 = int(il[j][3])
+			
 			pre.append(il[i])
 			post.append(il[j])
-			ab.append(((i//4)*16)+(j//4))
-			bit_diff.append(diff(il[i], il[j]))
-			passaggio.append((i*16)+j)
+			
+			#x.append(my_xor(
+			#		my_xor(post_r1, post_r2), 
+			#		my_and(post_a, post_b))
+			#)
+			
+			#x.append(my_xor(pre_a+pre_b, post_a+post_b))
+			#x.append(my_xor((pre_a<<1)+pre_b, (post_a<<1)+post_b))
+			#x.append(my_and((pre_a<<1)+pre_b, (post_a<<1)+post_b))
+			
+			#x.append(my_xor(my_and(pre_a, pre_b), my_and(post_a, post_b))) # --> più alto	
+			x.append(post_a)
+			
+			#x.append(my_and(my_xor(pre_a, pre_b), my_xor(post_a, post_b)))
+			#x.append((my_and(pre_a, pre_b)<<1) + my_and(post_a, post_b))
+			#x.append(my_and(
+			#		my_xor(my_and(pre_a, pre_b), my_and(post_a, post_b)),
+			#		my_xor(my_and(pre_a, post_a), my_and(pre_b, post_b))
+			#	)) 
+			#x.append(my_xor(
+			#		my_xor(my_and(pre_a, pre_b), my_and(post_a, post_b)),
+			#		my_and(my_and(pre_a, post_a), my_and(pre_b, post_b))
+			#	))
+			#x.append(hamming_distance(my_and(pre_a, pre_b), my_and(post_a, post_b))) # -> stesso risultato del più alto
+			#x.append(my_and(
+			#		hamming_distance(my_and(pre_a, pre_b), my_and(post_a, post_b)),
+			#		hamming_distance(my_and(pre_a, post_a), my_and(pre_b, post_b))
+			#))
+			
+						
+			#ab.append(((i//4)*16)+(j//4))
+			#bit_diff.append(diff(il[i], il[j]))
+			#passaggio.append((i*16)+j)
 	    
-	return pre, post, ab, passaggio, bit_diff
+	return pre, post, x #ab, passaggio, bit_diff
 
 def create_corr_table(log):
 
@@ -100,7 +160,9 @@ def create_corr_table(log):
 	t_len = math.sqrt(len(toggles))
 	inputs = create_input_list(int(t_len))
 
-	data = {"Old values": inputs[0], "New values": inputs[1], "AB change ID": inputs[2], "Input change ID": inputs[3], "Hamming distance": inputs[4], "Toggles": toggles}
+	#data = {"Old values": inputs[0], "New values": inputs[1], "AB change ID": inputs[2], "Input change ID": inputs[3], "Hamming distance": inputs[4], "Toggles": toggles}
+
+	data = {"Old values": inputs[0], "New values": inputs[1], "Toggles": toggles, "Input XOR": inputs[2]}
 
 	df = pd.DataFrame(data = data)
 
@@ -128,6 +190,9 @@ def pearsons_correlation(df, df_del, df_in_del, col1, col2):
 	df = pd.concat([inputs, toggles], axis=1)
 
 	corr_table = df.corr(method='pearson')
+	print(corr_table)
+	print("-----------------------------------------------------")
+	print()
 	
 	# calculate correlation for df with gate delays
 	inputs = df_del.iloc[:, col1].to_frame()
@@ -136,6 +201,9 @@ def pearsons_correlation(df, df_del, df_in_del, col1, col2):
 	df = pd.concat([inputs, toggles], axis=1)
 
 	corr_table_del = df.corr(method='pearson')
+	print(corr_table_del)
+	print("-----------------------------------------------------")
+	print()
 	
 	# calculate correlation for df with gate and input delays
 	inputs = df_in_del.iloc[:, col1].to_frame()
@@ -144,6 +212,10 @@ def pearsons_correlation(df, df_del, df_in_del, col1, col2):
 	df = pd.concat([inputs, toggles], axis=1)
 
 	corr_table_in_del = df.corr(method='pearson')
+	print(corr_table_in_del)
+	print("-----------------------------------------------------")
+	print()
+
 
 	return corr_table, corr_table_del, corr_table_in_del
 
@@ -159,35 +231,42 @@ if __name__ == "__main__":
 	vvp_logs = simulate(tb)
 
 	df = create_corr_table(vvp_logs[0])
+	#print(df)
 	df_del = create_corr_table(vvp_logs[1])
 	df_in_del = create_corr_table(vvp_logs[2])
 
 	with pd.ExcelWriter("./spreadsheets/" + spreadsheet + ".xlsx") as writer:
 		# write starting tables on excel workbook
 		df.to_excel(writer, index=False, sheet_name="Without delays")
-		legends()[0].to_excel(writer, index=False, sheet_name="Without delays", startrow=0, startcol=8)
-		df_del.to_excel(writer, index=False, sheet_name="Gate delays")
-		legends()[0].to_excel(writer, index=False, sheet_name="Without delays", startrow=0, startcol=8)
-		df_in_del.to_excel(writer, index=False, sheet_name="Gate+input delays")
-		legends()[0].to_excel(writer, index=False, sheet_name="Without delays", startrow=0, startcol=8)
+		#legends()[0].to_excel(writer, index=False, sheet_name="Without delays", startrow=0, startcol=8)
+		#df_del.to_excel(writer, index=False, sheet_name="Gate delays")
+		#legends()[0].to_excel(writer, index=False, sheet_name="Without delays", startrow=0, startcol=8)
+		#df_in_del.to_excel(writer, index=False, sheet_name="Gate+input delays")
+		#legends()[0].to_excel(writer, index=False, sheet_name="Without delays", startrow=0, startcol=8)
 		
 		# write correlation table for transition from old to new state of all inputs
-		corr_tables = pearsons_correlation(df, df_del, df_in_del, 3, 5)
-		corr_tables[0].to_excel(writer, sheet_name="Corr tables", startrow=0, startcol=0)
-		corr_tables[1].to_excel(writer, sheet_name="Corr tables", startrow=0, startcol=5)
-		corr_tables[2].to_excel(writer, sheet_name="Corr tables", startrow=0, startcol=10)
+		corr_tables = pearsons_correlation(df, df_del, df_in_del, 2, 3)
+		#corr_tables[0].to_excel(writer, sheet_name="Corr tables", startrow=0, startcol=0)
+		#corr_tables[1].to_excel(writer, sheet_name="Corr tables", startrow=0, startcol=5)
+		#corr_tables[2].to_excel(writer, sheet_name="Corr tables", startrow=0, startcol=10)
+		
+		# write correlation table for transition from old to new state of all inputs
+		#corr_tables = pearsons_correlation(df, df_del, df_in_del, 3, 5)
+		#corr_tables[0].to_excel(writer, sheet_name="Corr tables", startrow=0, startcol=0)
+		#corr_tables[1].to_excel(writer, sheet_name="Corr tables", startrow=0, startcol=5)
+		#corr_tables[2].to_excel(writer, sheet_name="Corr tables", startrow=0, startcol=10)
 		
 		# write correlation table for transition from old to new state of a and b
-		corr_tables = pearsons_correlation(df, df_del, df_in_del, 2, 5)
-		corr_tables[0].to_excel(writer, sheet_name="Corr tables", startrow=5, startcol=0)
-		corr_tables[1].to_excel(writer, sheet_name="Corr tables", startrow=5, startcol=5)
-		corr_tables[2].to_excel(writer, sheet_name="Corr tables", startrow=5, startcol=10)
+		#corr_tables = pearsons_correlation(df, df_del, df_in_del, 2, 5)
+		#corr_tables[0].to_excel(writer, sheet_name="Corr tables", startrow=5, startcol=0)
+		#corr_tables[1].to_excel(writer, sheet_name="Corr tables", startrow=5, startcol=5)
+		#corr_tables[2].to_excel(writer, sheet_name="Corr tables", startrow=5, startcol=10)
 		
 		# write correlation table for the number of bits that change from old to new state
-		corr_tables = pearsons_correlation(df, df_del, df_in_del, 4, 5)
-		corr_tables[0].to_excel(writer, sheet_name="Corr tables", startrow=10, startcol=0)
-		corr_tables[1].to_excel(writer, sheet_name="Corr tables", startrow=10, startcol=5)
-		corr_tables[2].to_excel(writer, sheet_name="Corr tables", startrow=10, startcol=10)
+		#corr_tables = pearsons_correlation(df, df_del, df_in_del, 4, 5)
+		#corr_tables[0].to_excel(writer, sheet_name="Corr tables", startrow=10, startcol=0)
+		#corr_tables[1].to_excel(writer, sheet_name="Corr tables", startrow=10, startcol=5)
+		#corr_tables[2].to_excel(writer, sheet_name="Corr tables", startrow=10, startcol=10)
 
-	print("spreadsheet with results saved in " + os.getcwd() + "/spreadsheets/" + spreadsheet + ".xlsx")
+	#print("spreadsheet with results saved in " + os.getcwd() + "/spreadsheets/" + spreadsheet + ".xlsx")
 
