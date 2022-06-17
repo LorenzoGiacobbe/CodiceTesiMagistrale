@@ -1,6 +1,4 @@
-import matplotlib.pyplot as plt
 import pandas as pd
-import numpy as np
 import subprocess
 import sys
 import math
@@ -14,6 +12,36 @@ def check_code(code):
 
 def sim_error():
     	print("Something went wrong with the execution")
+
+def write_chart(writer, sheet, shape):
+    workbook  = writer.book
+    worksheet = writer.sheets[sheet]
+    chart = workbook.add_chart({'type': 'column'})
+    chart.add_series({'values': [sheet, 1, 1, shape[0], 1]})
+    worksheet.insert_chart(1, 3, chart)
+
+# Write data to excek file
+def write_excel(data):
+    # data[0] -> correlation matrix
+    # data[1] -> data for no del toggle bar chart
+    # data[2] -> data for  del toggle bar chart
+    # data[3] -> data for in_del toggle bar chart
+
+    with pd.ExcelWriter("./spreadsheets/" + spreadsheet + ".xlsx") as writer:
+        # correlation matrix on first sheet
+        data[0].to_excel(writer, index=True, sheet_name="Correlation matrix")
+
+        # no del toggles bar chart
+        data[1].to_excel(writer, index=True, sheet_name="Toggles no del")
+        write_chart(writer, "Toggles no del", data[1].shape)
+
+        # no del toggles bar chart
+        data[2].to_excel(writer, index=True, sheet_name="Toggles del")
+        write_chart(writer, "Toggles del", data[2].shape)
+
+        # no del toggles bar chart
+        data[3].to_excel(writer, index=True, sheet_name="Toggles input del")
+        write_chart(writer, "Toggles input del", data[3].shape)
 
 # Computational logic
 def my_xor(i1, i2):
@@ -104,7 +132,7 @@ def create_HD(len):
         for j in range(len):
             pre_a = int(il[i][0])
             post_a = int(il[j][0])
-            pre_b = int(il[i][0])
+            pre_b = int(il[i][1])
             post_b = int(il[j][1])
 
             corr_func_a.append(my_xor(pre_a, post_a))
@@ -123,25 +151,12 @@ def create_HD(len):
 def pearsons_correlation(toggles, inputs):
     df = pd.concat([pd.DataFrame(inputs), pd.DataFrame(toggles[0])], axis=1)
     corr_table = df.corr(method='pearson')
-    # print("no del")
-    # print(corr_table)
-    # print("--------------------------------------")
-    # print()
 
     df = pd.concat([pd.DataFrame(inputs), pd.DataFrame(toggles[1])], axis=1)
     corr_table_del = df.corr(method='pearson')
-    # print("del")
-    # print(corr_table_del)
-    # print("--------------------------------------")
-    # print()
 
     df = pd.concat([pd.DataFrame(inputs), pd.DataFrame(toggles[2])], axis=1)
     corr_table_in_del = df.corr(method='pearson')
-    # print("del in gate")
-    # print(corr_table_in_del)
-    # print("--------------------------------------")
-    # print()
-
 
     return corr_table, corr_table_del, corr_table_in_del
 
@@ -188,24 +203,20 @@ def create_toggles_hist(toggles):
             data_in_del.update({e: 1})
 
 
-    t = pd.DataFrame(data.values())
-    t.plot(kind='bar')
-    plt.savefig('./figures/toggles_hist.pdf')
+    p = pd.DataFrame(data.values(), columns=["Toggles"])
 
-    t = pd.DataFrame(data_del.values())
-    t.plot(kind='bar')
-    plt.savefig('./figures/toggles_del_hist.pdf')
+    p_del = pd.DataFrame(data_del.values(), columns=["Toggles"])
 
-    t = pd.DataFrame(data_in_del.values())
-    t.plot(kind='bar')
-    plt.savefig('./figures/toggles_in_del_hist.pdf')
+    p_in_del = pd.DataFrame(data_in_del.values(), columns=["Toggles"])
+
+    return p, p_del, p_in_del
 
 
-# create the correlation matrix
+# create the correlation matrix and histogram data
 def create_cm_hist(logs):
 
     toggles = create_toggle_lists(logs)
-    create_toggles_hist(toggles)
+    t_df = create_toggles_hist(toggles)
 
     t_len = math.sqrt(len(toggles[0]))
     
@@ -221,7 +232,7 @@ def create_cm_hist(logs):
 
     df = pd.DataFrame(data=data, index=index)
 
-    return df
+    return df, t_df[0], t_df[1], t_df[2]
 
 if __name__ == "__main__": 
 
@@ -231,3 +242,7 @@ if __name__ == "__main__":
     vvp_logs = simulate(tb)
 
     data = create_cm_hist(vvp_logs)
+    
+    write_excel(data)
+
+        
