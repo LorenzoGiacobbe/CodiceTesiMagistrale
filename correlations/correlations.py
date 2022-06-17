@@ -59,13 +59,6 @@ def legends():
 
 	return legends
 
-# User interaction
-def get_inputs():
-	tb = input("insert the path of testbench to execute:")
-	spreadsheet = input("insert the name of the spreadsheet:")
-	
-	return tb, spreadsheet
-
 # Error handling
 def check_code(code):
 	if code != 1:
@@ -128,8 +121,8 @@ def create_input_list(len):
 			#x.append(my_xor((pre_a<<1)+pre_b, (post_a<<1)+post_b))
 			#x.append(my_and((pre_a<<1)+pre_b, (post_a<<1)+post_b))
 			
-			#x.append(my_xor(my_and(pre_a, pre_b), my_and(post_a, post_b))) # --> più alto	
-			x.append(post_a)
+			x.append(my_xor(my_and(pre_a, pre_b), my_and(post_a, post_b))) # --> più alto	
+			#x.append(post_a)
 			
 			#x.append(my_and(my_xor(pre_a, pre_b), my_xor(post_a, post_b)))
 			#x.append((my_and(pre_a, pre_b)<<1) + my_and(post_a, post_b))
@@ -151,7 +144,7 @@ def create_input_list(len):
 			#ab.append(((i//4)*16)+(j//4))
 			#bit_diff.append(diff(il[i], il[j]))
 			#passaggio.append((i*16)+j)
-	    
+	print(x)
 	return pre, post, x #ab, passaggio, bit_diff
 
 def create_corr_table(log):
@@ -223,10 +216,6 @@ if __name__ == "__main__":
 
 	tb = "./verilog/tb/correlation_tb.v"
 	spreadsheet = sys.argv[1]
-
-	#ui = get_inputs() # 0 = tesbench; 1 = spreadsheet
-	#tb = ui[0]
-	#spreadsheet = ui[1]
 
 	vvp_logs = simulate(tb)
 
