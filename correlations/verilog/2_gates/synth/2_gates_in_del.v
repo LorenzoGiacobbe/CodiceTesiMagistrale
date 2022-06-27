@@ -32,7 +32,7 @@ module module_2_gates (
     // assign #0.01 _delR2_ = r2;
 
     assign #0.00 _delA_  = a;
-    assign #0.35 _delB_  = b;
+    assign #0.49 _delB_  = b;
     assign #0.00 _delR1_ = r1;
     assign #0.00 _delR2_ = r2;
 
