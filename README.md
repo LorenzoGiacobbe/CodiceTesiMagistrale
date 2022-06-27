@@ -1,5 +1,5 @@
 # Correlations
-to run the code: correlations.py <name_of_spreadsheet>
+to run the code: correlations.py <desired_name_of_spreadsheet>
 
 Takes as input a log file and generates the Correlation table for the requested Simulation
 
@@ -7,10 +7,9 @@ Results saved on a Excel Spreadsheet saved at ./correlations/spreadsheets/
 
 
 # Osservazioni
-gate delay: 
-    - le correlazioni sono più alte prendendo ab insieme
-    - prendendo la HD di un solo ingresso (tra valori pre e post) la correlazione è uguale alla correlazione prendendo solo il valore post
-
-input delay: 
-    - le correlazioni sono più alte prendendo gli input singolarmente (a o b)
-    - in caso di presenza di ritardo per un ingresso azzera la correlazione del HW di quel input
+In presenza di delay sugli input esiste una correlazione se:
+-> del_NAND > del_XOR
+-> max(del_a, del_b) + del_NAND > del_XOR 
+	-> se del_a + del_NAND > del_XOR e del_b + del_NAND < del_XOR (-> correlazione solo con b e viceversa)
+	-> se del_a + del_NAND > del_XOR e del_b + del_NAND > del_XOR (-> correlazione con entrabi gli input come nel caso senza del_input)
+-> max(del_a, del_b) + del_NAND - del_XOR >= del_XOR (-> per garantire la presenza di glitch)

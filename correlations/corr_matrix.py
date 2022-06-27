@@ -242,6 +242,8 @@ if __name__ == "__main__":
     vvp_logs = simulate(tb)
 
     data = create_cm_hist(vvp_logs)
+
+    print(data[0])
     
     write_excel(data)
 
