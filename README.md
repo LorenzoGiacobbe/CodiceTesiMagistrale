@@ -13,3 +13,5 @@ In presenza di delay sugli input esiste una correlazione se:
 	-> se del_a + del_NAND > del_XOR e del_b + del_NAND < del_XOR (-> correlazione solo con b e viceversa)
 	-> se del_a + del_NAND > del_XOR e del_b + del_NAND > del_XOR (-> correlazione con entrabi gli input come nel caso senza del_input)
 -> max(del_a, del_b) + del_NAND - del_XOR >= del_XOR (-> per garantire la presenza di glitch)
+
+=> PERCHÈ IN QUESTO MODO I GLITCH SONO CAUSATI DAL CAMBIAMENTO DEGLI INGRESSI DEL NAND E NON DAI RANDOM QUINDI RISULTA UNA CORRELAZIONE CON A E B
