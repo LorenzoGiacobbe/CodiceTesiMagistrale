@@ -1,14 +1,11 @@
+`include "./scripts/verilog/src/2_gates.v"
+
+`include "./config/config.v"
+
 `timescale 1ns/1fs
 
-`ifdef IN_DEL
-	`include "./verilog/2_gates/synth/2_gates_in_del.v"
-`else
-	`include "./verilog/2_gates/synth/2_gates.v"
-`endif
-
-
-module correlation_tb;
-reg a, b, r1, r2, q;
+module correlation_2_tb;
+reg a, b, r1, r2;
 reg VPWR, VGND;
 
 wire y1, y2;
@@ -25,8 +22,8 @@ integer sim;
 // simulation	
 initial begin
 
-	$dumpfile("./verilog/tb/vcd/correlation.vcd");
-	$dumpvars(0, correlation_tb);
+	$dumpfile("./scripts/verilog/vcd/correlation.vcd");
+	$dumpvars(0, correlation_2_tb);
 
 	VPWR = 1'b1;
 	VGND = 1'b0;
@@ -34,8 +31,8 @@ initial begin
 
 	$monitor("out: %b", y1);
 
-	for (i = 0; i < 16; i++) begin
-		for (j = 0; j < 16; j++) begin
+	for (i = 0; i < `SIM; i++) begin
+		for (j = 0; j < `SIM; j++) begin
 			{a, b, r1, r2} = i; #5;
 			$display("BEGIN SIM %d", sim);
 			sim++;

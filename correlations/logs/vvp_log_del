@@ -1,4 +1,4 @@
-VCD info: dumpfile ./verilog/tb/vcd/correlation.vcd opened for output.
+VCD info: dumpfile ./scripts/verilog/vcd/correlation.vcd opened for output.
 out: x
 out: 0
 BEGIN SIM           0
@@ -250,16 +250,24 @@ out: 0
 BEGIN SIM          71
 END
 BEGIN SIM          72
+out: 1
+out: 0
 END
 BEGIN SIM          73
+out: 1
+out: 0
 out: 1
 END
 out: 0
 BEGIN SIM          74
 out: 1
+out: 0
+out: 1
 END
 out: 0
 BEGIN SIM          75
+out: 1
+out: 0
 END
 BEGIN SIM          76
 out: 1
@@ -308,13 +316,21 @@ END
 out: 1
 BEGIN SIM          88
 out: 0
+out: 1
+out: 0
 END
 out: 1
 BEGIN SIM          89
+out: 0
+out: 1
 END
 BEGIN SIM          90
+out: 0
+out: 1
 END
 BEGIN SIM          91
+out: 0
+out: 1
 out: 0
 END
 out: 1
@@ -364,13 +380,21 @@ END
 out: 1
 BEGIN SIM         104
 out: 0
+out: 1
+out: 0
 END
 out: 1
 BEGIN SIM         105
+out: 0
+out: 1
 END
 BEGIN SIM         106
+out: 0
+out: 1
 END
 BEGIN SIM         107
+out: 0
+out: 1
 out: 0
 END
 out: 1
@@ -418,16 +442,24 @@ out: 0
 BEGIN SIM         119
 END
 BEGIN SIM         120
+out: 1
+out: 0
 END
 BEGIN SIM         121
+out: 1
+out: 0
 out: 1
 END
 out: 0
 BEGIN SIM         122
 out: 1
+out: 0
+out: 1
 END
 out: 0
 BEGIN SIM         123
+out: 1
+out: 0
 END
 BEGIN SIM         124
 out: 1
@@ -463,16 +495,24 @@ BEGIN SIM         131
 END
 BEGIN SIM         132
 END
+out: 1
+out: 0
 BEGIN SIM         133
 out: 1
 END
+out: 0
+out: 1
 out: 0
 BEGIN SIM         134
 out: 1
 END
 out: 0
+out: 1
+out: 0
 BEGIN SIM         135
 END
+out: 1
+out: 0
 BEGIN SIM         136
 END
 BEGIN SIM         137
@@ -522,13 +562,21 @@ BEGIN SIM         148
 out: 0
 END
 out: 1
+out: 0
+out: 1
 BEGIN SIM         149
 END
+out: 0
+out: 1
 BEGIN SIM         150
 END
+out: 0
+out: 1
 BEGIN SIM         151
 out: 0
 END
+out: 1
+out: 0
 out: 1
 BEGIN SIM         152
 out: 0
@@ -578,13 +626,21 @@ BEGIN SIM         164
 out: 0
 END
 out: 1
+out: 0
+out: 1
 BEGIN SIM         165
 END
+out: 0
+out: 1
 BEGIN SIM         166
 END
+out: 0
+out: 1
 BEGIN SIM         167
 out: 0
 END
+out: 1
+out: 0
 out: 1
 BEGIN SIM         168
 out: 0
@@ -631,16 +687,24 @@ BEGIN SIM         179
 END
 BEGIN SIM         180
 END
+out: 1
+out: 0
 BEGIN SIM         181
 out: 1
 END
+out: 0
+out: 1
 out: 0
 BEGIN SIM         182
 out: 1
 END
 out: 0
+out: 1
+out: 0
 BEGIN SIM         183
 END
+out: 1
+out: 0
 BEGIN SIM         184
 END
 BEGIN SIM         185

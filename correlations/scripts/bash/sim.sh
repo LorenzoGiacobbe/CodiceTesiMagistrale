@@ -34,18 +34,18 @@ done
 
 # echo "compiling $TB ..."
 if [ $DEL -eq 0 ]; then
-	VVP="./verilog/tb/vvp/correlation.vvp"
-	iverilog -o $VVP -DXNOR_DELAY='#0' -DNAND_DELAY='#0' -DXOR_DELAY='#0' $TB
+	VVP="./scripts/verilog/vvp/correlation.vvp"
+	iverilog -o $VVP $TB
 	# echo "simulating $VVP ..."
 	vvp $VVP > ./logs/vvp_log
 elif [ $DEL -eq 1 ]; then 
-	VVP="./verilog/tb/vvp/correlation_del.vvp"
-	iverilog -o $VVP -DXNOR_DELAY='#0.1' -DNAND_DELAY='#0.2' -DXOR_DELAY='#0.5' $TB
+	VVP="./scripts/verilog/vvp/correlation_del.vvp"
+	iverilog -o $VVP -DDEL $TB
 	# echo "simulating $VVP ..."
 	vvp $VVP > ./logs/vvp_log_del
 elif [ $DEL -eq 2 ]; then
-	VVP="./verilog/tb/vvp/correlation_in_del.vvp"
-	iverilog -o $VVP -DXNOR_DELAY='#0.1' -DNAND_DELAY='#0.2' -DXOR_DELAY='#0.5' -DIN_DEL $TB
+	VVP="./scripts/verilog/vvp/correlation_in_del.vvp"
+	iverilog -o $VVP -DDEL -DIN_DEL $TB
 	# echo "simulating $VVP ..."
 	vvp $VVP > ./logs/vvp_log_in_del
 fi
