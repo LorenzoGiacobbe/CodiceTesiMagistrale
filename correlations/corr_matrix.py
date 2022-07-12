@@ -236,12 +236,14 @@ def create_cm_hist(logs):
 
 if __name__ == "__main__": 
 
-    tb = "./verilog/tb/correlation_tb.v"
-    spreadsheet = sys.argv[1]
+    tb = sys.argv[1] # "./verilog/tb/correlation_3_tb.v"
+    spreadsheet = sys.argv[2]
 
     vvp_logs = simulate(tb)
 
     data = create_cm_hist(vvp_logs)
+
+    print(data[0])
     
     write_excel(data)
 
