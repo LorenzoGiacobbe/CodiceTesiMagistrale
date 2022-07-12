@@ -7,11 +7,11 @@
 `endif
 
 
-module correlation_2_tb;
-reg a, b, r1, r2;
+module correlation_tb;
+reg a, b, r1, r2, q;
 reg VPWR, VGND;
 
-wire y1;
+wire y1, y2;
 
 module_2_gates uut_r(
 	.VPWR(VPWR), .VGND(VGND),
@@ -26,7 +26,7 @@ integer sim;
 initial begin
 
 	$dumpfile("./verilog/tb/vcd/correlation.vcd");
-	$dumpvars(0, correlation_2_tb);
+	$dumpvars(0, correlation_tb);
 
 	VPWR = 1'b1;
 	VGND = 1'b0;
@@ -47,4 +47,4 @@ initial begin
 	$finish;
 end
 
-endmodule
+endmodule  
