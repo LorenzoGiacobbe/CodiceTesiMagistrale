@@ -8,7 +8,7 @@ module correlation_2_tb;
 reg a, b, r1, r2;
 reg VPWR, VGND;
 
-wire y1;
+wire y1, y2;
 
 module_2_gates uut_r(
 	.VPWR(VPWR), .VGND(VGND),
@@ -44,4 +44,4 @@ initial begin
 	$finish;
 end
 
-endmodule
+endmodule  
