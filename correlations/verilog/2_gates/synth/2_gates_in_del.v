@@ -26,15 +26,10 @@ module module_2_gates (
  wire _01_;
  wire _02_;
 
-    // assign #0.04 _delA_  = a;
-    // assign #0.35 _delB_  = b;
-    // assign #0.52 _delR1_ = r1;
-    // assign #0.01 _delR2_ = r2;
-
-    assign #0.44 _delA_  = a;
-    assign #0.54 _delB_  = b;
-    assign #0.00 _delR1_ = r1;
-    assign #0.00 _delR2_ = r2;
+    assign #0.04 _delA_  = a;
+    assign #0.35 _delB_  = b;
+    assign #0.52 _delR1_ = r1;
+    assign #0.01 _delR2_ = r2;
 
     sky130_fd_sc_hd__nand2_1 _nand_ (.A(_delA_),
         .B(_delB_),
