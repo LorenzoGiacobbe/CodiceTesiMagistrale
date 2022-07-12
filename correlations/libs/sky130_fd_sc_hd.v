@@ -1,9 +1,4 @@
-/*
-* VALORI OPENLANE
-* XOR:  1.52
-* XNOR: 1.45
-* NAND: 1.52
-*/
+`include "./config/config.v"
 
 // circuito con q 
 /*

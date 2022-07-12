@@ -1,5 +1,7 @@
-`include "/home/lorenzo/gadget_simulation/libs/primitives.v"
-`include "/home/lorenzo/gadget_simulation/libs/sky130_fd_sc_hd.v"
+`include "./libs/primitives.v"
+`include "./libs/sky130_fd_sc_hd.v"
+
+`include "./config/config.v"
 
 `timescale 1ns / 1fs
 
@@ -29,11 +31,11 @@ module module_3_gates (
  wire _01_;
  wire _02_;
 
-    assign _delA_  = a;
-    assign _delB_  = b;
-    assign _delR1_ = r1;
-    assign _delR2_ = r2;
-    assign _delQ_ = q;
+    assign `a _delA_  = a;
+    assign `b _delB_  = b;
+    assign `r1 _delR1_ = r1;
+    assign `r2 _delR2_ = r2;
+    assign `q _delQ_ = q;
 
     sky130_fd_sc_hd__nand2_1 _nand_ (.A(_delA_),
         .B(_delB_),

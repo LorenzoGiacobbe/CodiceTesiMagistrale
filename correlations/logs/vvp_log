@@ -1,4 +1,4 @@
-VCD info: dumpfile ./verilog/tb/vcd/correlation.vcd opened for output.
+VCD info: dumpfile ./scripts/verilog/vcd/correlation.vcd opened for output.
 out: 0
 BEGIN SIM           0
 END
