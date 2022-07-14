@@ -37,17 +37,17 @@ if [ $DEL -eq 0 ]; then
 	VVP="./scripts/verilog/vvp/correlation.vvp"
 	iverilog -o $VVP $TB
 	# echo "simulating $VVP ..."
-	vvp $VVP > ./logs/vvp_log
+	vvp $VVP > ./logs/vvp_log.log
 elif [ $DEL -eq 1 ]; then 
 	VVP="./scripts/verilog/vvp/correlation_del.vvp"
 	iverilog -o $VVP -DDEL $TB
 	# echo "simulating $VVP ..."
-	vvp $VVP > ./logs/vvp_log_del
+	vvp $VVP > ./logs/vvp_log_del.log
 elif [ $DEL -eq 2 ]; then
 	VVP="./scripts/verilog/vvp/correlation_in_del.vvp"
 	iverilog -o $VVP -DDEL -DIN_DEL $TB
 	# echo "simulating $VVP ..."
-	vvp $VVP > ./logs/vvp_log_in_del
+	vvp $VVP > ./logs/vvp_log_in_del.log
 fi
 
 exit 1

@@ -8,13 +8,15 @@ from config.config import config
 
 if __name__ == "__main__": 
 
-    tb = sys.argv[1]
-    conf = sys.argv[2]
-    spreadsheet = sys.argv[3]
+    # tb = sys.argv[1]
+    # conf = sys.argv[2]
+    
+    module = sys.argv[1]
+    spreadsheet = sys.argv[2]
 
-    config(conf)
+    config()
 
-    vvp_logs = simulate(tb)
+    vvp_logs = simulate(module)
 
     data = create_cm_hist(vvp_logs)
     print(data[0])

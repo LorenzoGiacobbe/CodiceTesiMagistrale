@@ -1,5 +1,7 @@
 `define SIM 16
+
 `define CLK_PERIOD #5
+
 `define IN_SIZE 4
 `define OUT_SIZE 1
 
@@ -14,13 +16,13 @@
 `endif
 
 `ifdef DEL
-  `define a #0.02
-  `define b #0.45
   `define r1 #0.00
   `define r2 #0.00
+  `define a #0.02
+  `define b #0.45
 `else
-  `define a #0
-  `define b #0
   `define r1 #0
   `define r2 #0
+  `define a #0
+  `define b #0
 `endif

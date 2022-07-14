@@ -1,18 +1,18 @@
 import subprocess
-
-from scripts.python.errors import check_code
+from scripts.python.create_interface import create_if
 
 # gadget simulation
-def simulate(tb):
-	log = "./logs/vvp_log"
-	log_del = "./logs/vvp_log_del"
-	log_in_del = "./logs/vvp_log_in_del"
+def simulate(module_name):
+	tb = "./scripts/verilog/tb/tb.v"
 
-	exit_code = subprocess.call(["./scripts/bash/sim.sh", "-t", tb])
-	check_code(exit_code)
-	exit_code = subprocess.call(["./scripts/bash/sim.sh", "-d", "-t", tb])
-	check_code(exit_code)
-	exit_code = subprocess.call(["./scripts/bash/sim.sh", "-D", "-t", tb])
-	check_code(exit_code)
+	create_if(module_name)
+
+	log = "./logs/vvp_log.log"
+	log_del = "./logs/vvp_log_del.log"
+	log_in_del = "./logs/vvp_log_in_del.log"
+
+	subprocess.call(["./scripts/bash/sim.sh", "-t", tb])
+	subprocess.call(["./scripts/bash/sim.sh", "-d", "-t", tb])
+	subprocess.call(["./scripts/bash/sim.sh", "-D", "-t", tb])
 
 	return log, log_del, log_in_del
