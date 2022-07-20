@@ -1,4 +1,4 @@
-`define SIM 16
+`define SIM 11
 `define CLK_PERIOD #5
 `define IN_SIZE 4
 `define OUT_SIZE 1
@@ -13,7 +13,7 @@
   `define XOR_DELAY #0
 `endif
 
-`ifdef DEL
+`ifdef IN_DEL
   `define a #0.02
   `define b #0.45
   `define r1 #0.00

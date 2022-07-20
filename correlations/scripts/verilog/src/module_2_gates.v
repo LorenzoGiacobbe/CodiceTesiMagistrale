@@ -16,16 +16,16 @@ module module_2_gates (
  wire _01_;
  wire _02_;
 
-    sky130_fd_sc_hd__nand2_1 _nand_ (.A(in[0]),
-        .B(in[1]),
+    sky130_fd_sc_hd__nand2_1 _nand_ (.A(in[3]),
+        .B(in[2]),
         .VGND(VGND),
         .VNB(VGND),
         .VPB(VPWR),
         .VPWR(VPWR),
         .Y(_01_));
 
-    sky130_fd_sc_hd__xor2_1 _xor_(.A(in[2]),
-        .B(in[3]),
+    sky130_fd_sc_hd__xor2_1 _xor_(.A(in[1]),
+        .B(in[0]),
         .VGND(VGND),
         .VNB(VGND),
         .VPB(VPWR),

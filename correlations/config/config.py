@@ -1,42 +1,37 @@
 import math
 from scripts.python.errors import CLK_ERROR, DEL_ERROR, check_code
-
+import config.global_vars as gv
 
 def read_del(line):
     return line.split()[1], line.split()[2]
 
-# def sort_dict(d):
-#     d_sort = dict()
-#     keys = sorted(d, key=d.get)
-
-#     for k in keys:
-#         d_sort[k] = d[k]
-
-#     return d_sort
-
 def create_conf_file_v():
     in_del = dict()
     gate_del = dict()
-    simulations = 0
     clk = 0
-    in_size = 0
-    out_size = 0
+    full = 'y'
 
     file = "./config/config.conf"
 
     with open(file) as conf:
         for line in conf:
             if line.startswith("sim"):
-                simulations = int(line.split()[1])
+                gv.new_simulations(int(line.split()[1]))
+            
+            if line.startswith("full"):
+                full = line.split()[1]
 
             elif line.startswith("clk"):
                 clk = int(line.split()[1])
 
             elif line.startswith("in_size"):
-                in_size = int(line.split()[1])
+                gv.new_in_size(int(line.split()[1]))
+
+            elif line.startswith("rand_size"):
+                gv.new_rand_size(int(line.split()[1]))
 
             elif line.startswith("out_size"):
-                out_size = int(line.split()[1])
+                gv.new_out_size(int(line.split()[1]))
 
             elif line.startswith("input"):
                 data = read_del(line)
@@ -46,26 +41,28 @@ def create_conf_file_v():
                 data = read_del(line)
                 gate_del[data[0]] = data[1]
 
-    if simulations == 0:
-        simulations = len(in_del)**2
+    if gv.simulations == 0:
+        gv.new_simulations(len(in_del)**2)
 
     if clk == 0:
         check_code(CLK_ERROR)
 
-    if in_size != len(in_del):
+    if (gv.in_size + gv.rand_size) != len(in_del):
         check_code(DEL_ERROR)
 
-    write_config_v(in_del, gate_del, simulations, clk, in_size, out_size)
+    write_config_v(full, in_del, gate_del, gv.simulations, clk, gv.in_size, gv.rand_size, gv.out_size)
 
-def write_config_v(in_del, gate_del, sim, clk, in_size, out_size):
+def write_config_v(full, in_del, gate_del, sim, clk, in_size, rand_size, out_size):
     with open("./config/config.v", "a") as conf:
         conf.truncate(0)
 
         # config file for number of simulations
         r = int(math.sqrt(sim))
         conf.write("`define SIM " + str(r) + "\n")
+        if full == 'y':
+            conf.write("`define FULL")
         conf.write("`define CLK_PERIOD #" + str(clk) + "\n")
-        conf.write("`define IN_SIZE " + str(in_size) + "\n")
+        conf.write("`define IN_SIZE " + str(in_size+rand_size) + "\n")
         conf.write("`define OUT_SIZE " + str(out_size) + "\n")
 
         conf.write("\n")
@@ -84,7 +81,7 @@ def write_config_v(in_del, gate_del, sim, clk, in_size, out_size):
         conf.write("\n")
 
         #config file for input delays
-        conf.write("`ifdef DEL\n")
+        conf.write("`ifdef IN_DEL\n")
         for i in in_del:
             string = "  `define " + i + " #" + in_del[i] + "\n"
             conf.write(string)

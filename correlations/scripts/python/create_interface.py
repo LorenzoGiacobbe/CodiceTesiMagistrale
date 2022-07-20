@@ -1,3 +1,7 @@
+from scripts.python.errors import del_error
+import config.global_vars as gv
+
+
 def read_del_name(line):
     return line.split()[1]
 
@@ -15,11 +19,13 @@ def create_if(module_name):
 
         # loop to insert delays in inputs
         with open("./config/config.conf", "r") as conf:
-            d = 0
+            d = gv.in_size + gv.rand_size
             for line in conf:
                 if line.startswith("input"):
+                    d -= 1
+                    if d<0:
+                        del_error()
                     interface.write('\tassign `' + read_del_name(line) + ' in_del[' + str(d) + '] = in[' + str(d) + '];\n')
-                    d += 1
 
         interface.write('\n\t`ifdef clk\n')
         interface.write('\t\t' + module_name + ' test(.VGND(VGND), .VPWR(VPWR), .clk(clk), .in(in), .y(out));\n')

@@ -34,15 +34,27 @@ initial begin
 
 	$monitor("out: %b", out);
 
-	for (i = 0; i < `SIM; i++) begin
-		for (j = 0; j < `SIM; j++) begin
-			in = i; `CLK_PERIOD;
-			$display("BEGIN SIM %d", sim);
-			sim++;
-			in = j; `CLK_PERIOD;
-			$display("END");
+	`ifdef FULL
+		for (i = 0; i < `SIM; i++) begin
+			for (j = 0; j < `SIM; j++) begin
+				in = i; `CLK_PERIOD;
+				$display("BEGIN SIM %d", sim);
+				sim++;
+				in = j; `CLK_PERIOD;
+				$display("END");
+			end
 		end
-	end
+	`else
+		for (i = 0; i < `SIM; i++) begin
+			for (j = 0; j < `SIM; j++) begin
+				in = {$random} % 2**`IN_SIZE; `CLK_PERIOD;
+				$display("BEGIN SIM %d", sim);
+				sim++;
+				in = {$random} % 2**`IN_SIZE; `CLK_PERIOD;
+				$display("END");
+			end
+		end
+	`endif
 
 	$finish;
 end

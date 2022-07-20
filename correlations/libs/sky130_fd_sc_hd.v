@@ -1,12 +1,4 @@
-//`include "./config/config.v"
-
-// circuito con q 
-
-`define XNOR_DELAY #(0)
-`define NAND_DELAY #(0)
-// circuito senza q
-`define XOR_DELAY  #(0)
-
+`include "./config/config.v"
 
 `define UNIT_DELAY #1
 

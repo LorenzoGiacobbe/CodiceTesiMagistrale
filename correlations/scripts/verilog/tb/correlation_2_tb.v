@@ -1,4 +1,4 @@
-`include "./scripts/verilog/src/2_gates.v"
+`include "./scripts/verilog/src/2_gates_old.v"
 
 `include "./config/config.v"
 
@@ -22,7 +22,7 @@ integer sim;
 // simulation	
 initial begin
 
-	$dumpfile("./scripts/verilog/vcd/correlation.vcd");
+	$dumpfile("./scripts/verilog/vcd/correlation_old.vcd");
 	$dumpvars(0, correlation_2_tb);
 
 	VPWR = 1'b1;
