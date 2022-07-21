@@ -1,4 +1,5 @@
 import math
+
 from scripts.python.errors import CLK_ERROR, DEL_ERROR, check_code
 import config.global_vars as gv
 
@@ -8,7 +9,8 @@ def read_del(line):
 def create_conf_file_v():
     in_del = dict()
     gate_del = dict()
-    clk = 0
+    clk = 'y'
+    period = 0
     full = 'y'
 
     file = "./config/config.conf"
@@ -18,11 +20,14 @@ def create_conf_file_v():
             if line.startswith("sim"):
                 gv.new_simulations(int(line.split()[1]))
             
-            if line.startswith("full"):
+            elif line.startswith("full"):
                 full = line.split()[1]
 
             elif line.startswith("clk"):
-                clk = int(line.split()[1])
+                clk = line.split()[1]
+
+            elif line.startswith("period"):
+                period = int(line.split()[1])
 
             elif line.startswith("in_size"):
                 gv.new_in_size(int(line.split()[1]))
@@ -50,9 +55,9 @@ def create_conf_file_v():
     if (gv.in_size + gv.rand_size) != len(in_del):
         check_code(DEL_ERROR)
 
-    write_config_v(full, in_del, gate_del, gv.simulations, clk, gv.in_size, gv.rand_size, gv.out_size)
+    write_config_v(full, in_del, gate_del, gv.simulations, clk, period, gv.in_size, gv.rand_size, gv.out_size)
 
-def write_config_v(full, in_del, gate_del, sim, clk, in_size, rand_size, out_size):
+def write_config_v(full, in_del, gate_del, sim, clk, period, in_size, rand_size, out_size):
     with open("./config/config.v", "a") as conf:
         conf.truncate(0)
 
@@ -60,8 +65,10 @@ def write_config_v(full, in_del, gate_del, sim, clk, in_size, rand_size, out_siz
         r = int(math.sqrt(sim))
         conf.write("`define SIM " + str(r) + "\n")
         if full == 'y':
-            conf.write("`define FULL")
-        conf.write("`define CLK_PERIOD #" + str(clk) + "\n")
+            conf.write("`define FULL\n")
+        if clk == 'y':
+            conf.write("`define CLK\n")
+        conf.write("`define CLK_PERIOD " + str(period) + "\n")
         conf.write("`define IN_SIZE " + str(in_size+rand_size) + "\n")
         conf.write("`define OUT_SIZE " + str(out_size) + "\n")
 

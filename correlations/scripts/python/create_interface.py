@@ -27,10 +27,10 @@ def create_if(module_name):
                         del_error()
                     interface.write('\tassign `' + read_del_name(line) + ' in_del[' + str(d) + '] = in[' + str(d) + '];\n')
 
-        interface.write('\n\t`ifdef clk\n')
-        interface.write('\t\t' + module_name + ' test(.VGND(VGND), .VPWR(VPWR), .clk(clk), .in(in), .y(out));\n')
+        interface.write('\n\t`ifdef CLK\n')
+        interface.write('\t\t' + module_name + ' test(.VGND(VGND), .VPWR(VPWR), .clk(clk), .in(in), .out(out));\n')
         interface.write('\t`else\n')
-        interface.write('\t\t' + module_name + ' test(.VGND(VGND), .VPWR(VPWR), .in(in), .y(out));\n')
+        interface.write('\t\t' + module_name + ' test(.VGND(VGND), .VPWR(VPWR), .in(in), .out(out));\n')
         interface.write('\t`endif\n\n')
         
         

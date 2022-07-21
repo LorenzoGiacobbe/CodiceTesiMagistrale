@@ -7,11 +7,11 @@ module module_2_gates (
     VGND,
     VPWR,
     in,
-    y);
+    out);
  input VGND;
  input VPWR;
  input [3:0] in;
- output y;
+ output out;
 
  wire _01_;
  wire _02_;
@@ -38,6 +38,6 @@ module module_2_gates (
         .VNB(VGND),
         .VPB(VPWR),
         .VPWR(VPWR),
-        .Y(y));
+        .Y(out));
 
 endmodule

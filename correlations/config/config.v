@@ -1,5 +1,6 @@
-`define SIM 11
-`define CLK_PERIOD #5
+`define SIM 16
+`define FULL
+`define CLK_PERIOD 5
 `define IN_SIZE 4
 `define OUT_SIZE 1
 

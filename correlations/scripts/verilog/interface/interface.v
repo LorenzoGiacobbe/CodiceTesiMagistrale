@@ -17,10 +17,10 @@ module interface(VGND, VPWR, clk, in, out);
 	assign `r1 in_del[1] = in[1];
 	assign `r2 in_del[0] = in[0];
 
-	`ifdef clk
-		module_2_gates test(.VGND(VGND), .VPWR(VPWR), .clk(clk), .in(in), .y(out));
+	`ifdef CLK
+		module_2_gates test(.VGND(VGND), .VPWR(VPWR), .clk(clk), .in(in), .out(out));
 	`else
-		module_2_gates test(.VGND(VGND), .VPWR(VPWR), .in(in), .y(out));
+		module_2_gates test(.VGND(VGND), .VPWR(VPWR), .in(in), .out(out));
 	`endif
 
 endmodule

@@ -13,22 +13,6 @@ def pearsons_correlation(toggles, inputs):
 
     return corr_table, corr_table_del, corr_table_in_del
 
-# def correlations(toggles, inputs):
-#     corr_a = list()
-#     corr_b = list()
-#     corr_ab = list()
-
-#     correlations_a  = pearsons_correlation(toggles, inputs[0])
-#     correlations_b  = pearsons_correlation(toggles, inputs[1])
-#     correlations_ab = pearsons_correlation(toggles, inputs[2])
-
-#     for i in range(3):
-#         corr_a.append(correlations_a[i].iat[0, 1])
-#         corr_b.append(correlations_b[i].iat[0, 1])
-#         corr_ab.append(correlations_ab[i].iat[0, 1])
-
-#     return corr_a, corr_b, corr_ab
-
 def correlations(toggles, inputs):
     corr = list()
     for i in range(gv.in_size):
