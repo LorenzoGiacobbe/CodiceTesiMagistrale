@@ -1,10 +1,10 @@
 import pandas as pd
-import math
 
 import config.global_vars as gv
 
 from scripts.python.correlations import correlations
-from scripts.python.functions import *
+from scripts.python.consume_models import consume_model, consume_model_pre_post, hw, hd
+from scripts.python.selection_functions import sel_func, sel_func_pre_post
 
 # Toggle lists creation
 def create_toggle_list(log):
@@ -82,40 +82,21 @@ def create_il(in_len):
 
     return il
 
-def create_HW(in_len):
-    # corr_func contiene una lista per ogni input
-    # ognuna di queste liste contiene l'HW del corrispettivo input per ogni sim
-    corr_func = list()
-    for i in range(gv.in_size):
-        l = list()
-        corr_func.append(l)
-
+def create_post(in_len):
     il = create_il(in_len)
 
-    for i in range(len(il)):
-        for input in range(gv.in_size):
-            post = int(il[i][in_len + input])
-            corr_func[input].append(hw(post))
+    post = sel_func(il)
+    result = consume_model(post)
 
-    return corr_func
+    return result
 
-def create_HD(in_len):
-    # corr_func contiene una lista per ogni input
-    # ognuna di queste liste contiene l'HW del corrispettivo input per ogni sim
-    corr_func = list()
-    for i in range(gv.in_size):
-        l = list()
-        corr_func.append(l)
-
+def create_pre_post(in_len):
     il = create_il(in_len)
 
-    for i in range(len(il)):
-        for input in range(gv.in_size):
-            pre = int(il[i][input])
-            post = int(il[i][in_len + input])
-            corr_func[input].append(hd(pre, post))
+    inputs = sel_func_pre_post(il)
+    result = consume_model_pre_post(inputs[0], inputs[1])
 
-    return corr_func
+    return result
 
 # create the correlation matrix and histogram data
 def create_cm_hist(logs):
@@ -124,12 +105,14 @@ def create_cm_hist(logs):
     toggles = create_toggle_lists(logs)
     t_df = create_toggles_hist(toggles)
 
-    # t_len = math.sqrt(len(toggles[0]))
     t_len = gv.in_size + gv.rand_size
     
-    HW_inputs = create_HW(int(t_len))
-    HD_inputs = create_HD(int(t_len))
-    
+    # HW_inputs = create_HW(int(t_len))
+    # HD_inputs = create_HD(int(t_len))
+
+    HW_inputs = create_post(int(t_len))
+    HD_inputs = create_pre_post(int(t_len))
+
     corr_HW = correlations(toggles, HW_inputs)
     corr_HD = correlations(toggles, HD_inputs)
 
@@ -142,9 +125,6 @@ def create_cm_hist(logs):
     for i in range(gv.in_size):      
         key = "HD input" + str(i)
         data[key] = corr_HD[i]
-
-    # data = {"HW a": corr_HW[0], "HW b": corr_HW[1], "HW ab": corr_HW[2],
-    #                 "HD a": corr_HD[0], "HD b": corr_HD[1], "HD ab": corr_HD[2]}
 
     df = pd.DataFrame(data=data, index=index)
 

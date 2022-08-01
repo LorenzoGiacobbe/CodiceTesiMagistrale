@@ -1,769 +1,470 @@
 VCD info: dumpfile ./scripts/verilog/vcd/correlation.vcd opened for output.
-out: 0
+out: xxxx
+out: 0111
 BEGIN SIM           0
+out: 0011
 END
 BEGIN SIM           1
-out: 1
+out: 1111
+out: 1010
 END
-out: 0
+out: 1100
 BEGIN SIM           2
-out: 1
 END
-out: 0
 BEGIN SIM           3
+out: 1000
+out: 1011
 END
+out: 0011
 BEGIN SIM           4
+out: 1111
 END
 BEGIN SIM           5
-out: 1
+out: 0101
+out: 1001
 END
-out: 0
+out: 0000
 BEGIN SIM           6
-out: 1
+out: 0010
 END
-out: 0
 BEGIN SIM           7
+out: 0110
+out: 0011
 END
+out: 0101
 BEGIN SIM           8
+out: 0000
 END
 BEGIN SIM           9
-out: 1
+out: 1001
+out: 0110
 END
-out: 0
+out: 1010
 BEGIN SIM          10
-out: 1
+out: 1111
 END
-out: 0
 BEGIN SIM          11
+out: 1001
+out: 1111
 END
+out: 1011
 BEGIN SIM          12
-out: 1
+out: 0110
 END
-out: 0
 BEGIN SIM          13
+out: 0101
+out: 0000
 END
 BEGIN SIM          14
+out: 1001
 END
 BEGIN SIM          15
-out: 1
+out: 1010
+out: 1100
 END
+out: 0000
 BEGIN SIM          16
-out: 0
+out: 0100
 END
-out: 1
 BEGIN SIM          17
+out: 0000
+out: 0101
 END
+out: 1001
 BEGIN SIM          18
+out: 1100
 END
 BEGIN SIM          19
-out: 0
 END
-out: 1
+out: 0011
 BEGIN SIM          20
-out: 0
+out: 0101
 END
-out: 1
 BEGIN SIM          21
+out: 0111
+out: 0110
 END
+out: 1100
 BEGIN SIM          22
+out: 0101
 END
 BEGIN SIM          23
-out: 0
+out: 1000
+out: 0101
 END
-out: 1
+out: 1110
 BEGIN SIM          24
-out: 0
+out: 1001
 END
-out: 1
 BEGIN SIM          25
+out: 1100
 END
+out: 1111
 BEGIN SIM          26
+out: 0011
 END
 BEGIN SIM          27
-out: 0
+out: 1010
 END
-out: 1
+out: 0000
 BEGIN SIM          28
+out: 0101
 END
 BEGIN SIM          29
-out: 0
+out: 1101
+out: 0010
 END
-out: 1
+out: 1001
 BEGIN SIM          30
-out: 0
+out: 0111
 END
-out: 1
 BEGIN SIM          31
+out: 1001
+out: 0101
 END
 BEGIN SIM          32
-out: 0
+out: 1001
 END
-out: 1
 BEGIN SIM          33
+out: 1010
 END
+out: 1100
 BEGIN SIM          34
+out: 1111
 END
 BEGIN SIM          35
-out: 0
+out: 0101
+out: 0000
 END
-out: 1
+out: 1000
 BEGIN SIM          36
-out: 0
+out: 0001
 END
-out: 1
 BEGIN SIM          37
+out: 0011
+out: 1001
 END
+out: 0101
 BEGIN SIM          38
+out: 1110
 END
 BEGIN SIM          39
-out: 0
+out: 0011
+out: 0000
 END
-out: 1
+out: 0101
 BEGIN SIM          40
-out: 0
+out: 0111
 END
-out: 1
 BEGIN SIM          41
+out: 1010
+out: 0101
 END
+out: 1010
 BEGIN SIM          42
+out: 0110
 END
 BEGIN SIM          43
-out: 0
+out: 0010
+out: 1111
 END
-out: 1
+out: 0110
 BEGIN SIM          44
+out: 0010
 END
 BEGIN SIM          45
-out: 0
+out: 0110
+out: 0001
 END
-out: 1
+out: 1111
 BEGIN SIM          46
-out: 0
+out: 1100
 END
-out: 1
 BEGIN SIM          47
+out: 0000
+out: 1100
 END
-out: 0
+out: 0011
 BEGIN SIM          48
+out: 0001
 END
 BEGIN SIM          49
-out: 1
+out: 1110
+out: 1101
 END
-out: 0
+out: 0101
 BEGIN SIM          50
-out: 1
+out: 1000
 END
-out: 0
 BEGIN SIM          51
+out: 0100
+out: 0000
 END
+out: 1011
 BEGIN SIM          52
+out: 1101
 END
 BEGIN SIM          53
-out: 1
+out: 1001
+out: 0101
 END
-out: 0
+out: 1100
 BEGIN SIM          54
-out: 1
+out: 1111
 END
-out: 0
 BEGIN SIM          55
+out: 0101
+out: 0111
 END
+out: 0101
 BEGIN SIM          56
+out: 0000
 END
 BEGIN SIM          57
-out: 1
+out: 0011
+out: 0110
 END
-out: 0
+out: 1001
 BEGIN SIM          58
-out: 1
+out: 0010
 END
-out: 0
 BEGIN SIM          59
+out: 1001
+out: 0000
 END
+out: 0110
 BEGIN SIM          60
-out: 1
+out: 1000
 END
-out: 0
 BEGIN SIM          61
+out: 0110
+out: 1001
 END
+out: 0011
 BEGIN SIM          62
 END
 BEGIN SIM          63
-out: 1
+out: 1100
+out: 1001
 END
-out: 0
+out: 1010
 BEGIN SIM          64
+out: 0000
 END
 BEGIN SIM          65
-out: 1
+out: 0011
+out: 1010
 END
-out: 0
+out: 1110
 BEGIN SIM          66
-out: 1
+out: 1001
 END
-out: 0
 BEGIN SIM          67
+out: 0110
 END
+out: 1001
 BEGIN SIM          68
+out: 1010
 END
 BEGIN SIM          69
-out: 1
+out: 1100
 END
-out: 0
+out: 0101
 BEGIN SIM          70
-out: 1
+out: 1101
 END
-out: 0
 BEGIN SIM          71
+out: 1110
 END
+out: 0011
 BEGIN SIM          72
+out: 1100
 END
 BEGIN SIM          73
-out: 1
+out: 0110
+out: 0000
 END
-out: 0
+out: 1111
 BEGIN SIM          74
-out: 1
+out: 1100
 END
-out: 0
 BEGIN SIM          75
+out: 0000
 END
+out: 0101
 BEGIN SIM          76
-out: 1
+out: 1110
 END
-out: 0
 BEGIN SIM          77
+out: 0101
+out: 1111
 END
+out: 0011
 BEGIN SIM          78
+out: 0110
 END
 BEGIN SIM          79
-out: 1
+out: 1110
+out: 0111
 END
+out: 0000
 BEGIN SIM          80
-out: 0
+out: 1001
 END
-out: 1
 BEGIN SIM          81
+out: 0011
+out: 0000
 END
 BEGIN SIM          82
+out: 0110
 END
 BEGIN SIM          83
-out: 0
+out: 1001
+out: 0100
 END
-out: 1
+out: 0011
 BEGIN SIM          84
-out: 0
+out: 0110
 END
-out: 1
 BEGIN SIM          85
+out: 0101
+out: 1010
 END
+out: 0110
 BEGIN SIM          86
+out: 1011
 END
 BEGIN SIM          87
-out: 0
+out: 0110
+out: 0111
 END
-out: 1
+out: 0001
 BEGIN SIM          88
-out: 0
+out: 1010
 END
-out: 1
 BEGIN SIM          89
+out: 1100
+out: 0100
 END
+out: 1110
 BEGIN SIM          90
+out: 1011
 END
 BEGIN SIM          91
-out: 0
+out: 1100
+out: 1110
 END
-out: 1
+out: 0100
 BEGIN SIM          92
+out: 1000
 END
 BEGIN SIM          93
-out: 0
+out: 1111
+out: 0101
 END
-out: 1
+out: 1010
 BEGIN SIM          94
-out: 0
+out: 0101
 END
-out: 1
 BEGIN SIM          95
+out: 0110
+out: 0000
 END
+out: 1010
 BEGIN SIM          96
-out: 0
+out: 0101
 END
-out: 1
 BEGIN SIM          97
+out: 0100
+out: 0110
 END
+out: 1010
 BEGIN SIM          98
+out: 1111
 END
 BEGIN SIM          99
-out: 0
+out: 1000
+out: 0001
 END
-out: 1
+out: 0011
 BEGIN SIM         100
-out: 0
+out: 1010
 END
-out: 1
 BEGIN SIM         101
+out: 0101
+out: 0011
 END
+out: 0100
 BEGIN SIM         102
+out: 1110
 END
 BEGIN SIM         103
-out: 0
+out: 0101
+out: 1110
 END
-out: 1
+out: 0001
 BEGIN SIM         104
-out: 0
+out: 0000
 END
-out: 1
 BEGIN SIM         105
+out: 1010
+out: 1100
 END
+out: 1010
 BEGIN SIM         106
+out: 0101
 END
 BEGIN SIM         107
-out: 0
+out: 0110
+out: 1100
 END
-out: 1
+out: 0100
 BEGIN SIM         108
+out: 0110
 END
 BEGIN SIM         109
-out: 0
+out: 0011
+out: 1101
 END
-out: 1
+out: 0111
 BEGIN SIM         110
-out: 0
+out: 0001
 END
-out: 1
 BEGIN SIM         111
+out: 1111
+out: 0110
 END
-out: 0
 BEGIN SIM         112
+out: 1001
 END
 BEGIN SIM         113
-out: 1
+out: 1101
+out: 1100
 END
-out: 0
+out: 0011
 BEGIN SIM         114
-out: 1
+out: 1011
 END
-out: 0
 BEGIN SIM         115
+out: 0101
+out: 1010
 END
+out: 0110
 BEGIN SIM         116
+out: 1100
 END
 BEGIN SIM         117
-out: 1
+out: 1011
+out: 0000
 END
-out: 0
+out: 0001
 BEGIN SIM         118
-out: 1
+out: 0111
 END
-out: 0
 BEGIN SIM         119
+out: 0011
 END
+out: 1011
 BEGIN SIM         120
-END
-BEGIN SIM         121
-out: 1
-END
-out: 0
-BEGIN SIM         122
-out: 1
-END
-out: 0
-BEGIN SIM         123
-END
-BEGIN SIM         124
-out: 1
-END
-out: 0
-BEGIN SIM         125
-END
-BEGIN SIM         126
-END
-BEGIN SIM         127
-out: 1
-END
-out: 0
-BEGIN SIM         128
-END
-BEGIN SIM         129
-out: 1
-END
-out: 0
-BEGIN SIM         130
-out: 1
-END
-out: 0
-BEGIN SIM         131
-END
-BEGIN SIM         132
-END
-BEGIN SIM         133
-out: 1
-END
-out: 0
-BEGIN SIM         134
-out: 1
-END
-out: 0
-BEGIN SIM         135
-END
-BEGIN SIM         136
-END
-BEGIN SIM         137
-out: 1
-END
-out: 0
-BEGIN SIM         138
-out: 1
-END
-out: 0
-BEGIN SIM         139
-END
-BEGIN SIM         140
-out: 1
-END
-out: 0
-BEGIN SIM         141
-END
-BEGIN SIM         142
-END
-BEGIN SIM         143
-out: 1
-END
-BEGIN SIM         144
-out: 0
-END
-out: 1
-BEGIN SIM         145
-END
-BEGIN SIM         146
-END
-BEGIN SIM         147
-out: 0
-END
-out: 1
-BEGIN SIM         148
-out: 0
-END
-out: 1
-BEGIN SIM         149
-END
-BEGIN SIM         150
-END
-BEGIN SIM         151
-out: 0
-END
-out: 1
-BEGIN SIM         152
-out: 0
-END
-out: 1
-BEGIN SIM         153
-END
-BEGIN SIM         154
-END
-BEGIN SIM         155
-out: 0
-END
-out: 1
-BEGIN SIM         156
-END
-BEGIN SIM         157
-out: 0
-END
-out: 1
-BEGIN SIM         158
-out: 0
-END
-out: 1
-BEGIN SIM         159
-END
-BEGIN SIM         160
-out: 0
-END
-out: 1
-BEGIN SIM         161
-END
-BEGIN SIM         162
-END
-BEGIN SIM         163
-out: 0
-END
-out: 1
-BEGIN SIM         164
-out: 0
-END
-out: 1
-BEGIN SIM         165
-END
-BEGIN SIM         166
-END
-BEGIN SIM         167
-out: 0
-END
-out: 1
-BEGIN SIM         168
-out: 0
-END
-out: 1
-BEGIN SIM         169
-END
-BEGIN SIM         170
-END
-BEGIN SIM         171
-out: 0
-END
-out: 1
-BEGIN SIM         172
-END
-BEGIN SIM         173
-out: 0
-END
-out: 1
-BEGIN SIM         174
-out: 0
-END
-out: 1
-BEGIN SIM         175
-END
-out: 0
-BEGIN SIM         176
-END
-BEGIN SIM         177
-out: 1
-END
-out: 0
-BEGIN SIM         178
-out: 1
-END
-out: 0
-BEGIN SIM         179
-END
-BEGIN SIM         180
-END
-BEGIN SIM         181
-out: 1
-END
-out: 0
-BEGIN SIM         182
-out: 1
-END
-out: 0
-BEGIN SIM         183
-END
-BEGIN SIM         184
-END
-BEGIN SIM         185
-out: 1
-END
-out: 0
-BEGIN SIM         186
-out: 1
-END
-out: 0
-BEGIN SIM         187
-END
-BEGIN SIM         188
-out: 1
-END
-out: 0
-BEGIN SIM         189
-END
-BEGIN SIM         190
-END
-BEGIN SIM         191
-out: 1
-END
-BEGIN SIM         192
-out: 0
-END
-out: 1
-BEGIN SIM         193
-END
-BEGIN SIM         194
-END
-BEGIN SIM         195
-out: 0
-END
-out: 1
-BEGIN SIM         196
-out: 0
-END
-out: 1
-BEGIN SIM         197
-END
-BEGIN SIM         198
-END
-BEGIN SIM         199
-out: 0
-END
-out: 1
-BEGIN SIM         200
-out: 0
-END
-out: 1
-BEGIN SIM         201
-END
-BEGIN SIM         202
-END
-BEGIN SIM         203
-out: 0
-END
-out: 1
-BEGIN SIM         204
-END
-BEGIN SIM         205
-out: 0
-END
-out: 1
-BEGIN SIM         206
-out: 0
-END
-out: 1
-BEGIN SIM         207
-END
-out: 0
-BEGIN SIM         208
-END
-BEGIN SIM         209
-out: 1
-END
-out: 0
-BEGIN SIM         210
-out: 1
-END
-out: 0
-BEGIN SIM         211
-END
-BEGIN SIM         212
-END
-BEGIN SIM         213
-out: 1
-END
-out: 0
-BEGIN SIM         214
-out: 1
-END
-out: 0
-BEGIN SIM         215
-END
-BEGIN SIM         216
-END
-BEGIN SIM         217
-out: 1
-END
-out: 0
-BEGIN SIM         218
-out: 1
-END
-out: 0
-BEGIN SIM         219
-END
-BEGIN SIM         220
-out: 1
-END
-out: 0
-BEGIN SIM         221
-END
-BEGIN SIM         222
-END
-BEGIN SIM         223
-out: 1
-END
-out: 0
-BEGIN SIM         224
-END
-BEGIN SIM         225
-out: 1
-END
-out: 0
-BEGIN SIM         226
-out: 1
-END
-out: 0
-BEGIN SIM         227
-END
-BEGIN SIM         228
-END
-BEGIN SIM         229
-out: 1
-END
-out: 0
-BEGIN SIM         230
-out: 1
-END
-out: 0
-BEGIN SIM         231
-END
-BEGIN SIM         232
-END
-BEGIN SIM         233
-out: 1
-END
-out: 0
-BEGIN SIM         234
-out: 1
-END
-out: 0
-BEGIN SIM         235
-END
-BEGIN SIM         236
-out: 1
-END
-out: 0
-BEGIN SIM         237
-END
-BEGIN SIM         238
-END
-BEGIN SIM         239
-out: 1
-END
-BEGIN SIM         240
-out: 0
-END
-out: 1
-BEGIN SIM         241
-END
-BEGIN SIM         242
-END
-BEGIN SIM         243
-out: 0
-END
-out: 1
-BEGIN SIM         244
-out: 0
-END
-out: 1
-BEGIN SIM         245
-END
-BEGIN SIM         246
-END
-BEGIN SIM         247
-out: 0
-END
-out: 1
-BEGIN SIM         248
-out: 0
-END
-out: 1
-BEGIN SIM         249
-END
-BEGIN SIM         250
-END
-BEGIN SIM         251
-out: 0
-END
-out: 1
-BEGIN SIM         252
-END
-BEGIN SIM         253
-out: 0
-END
-out: 1
-BEGIN SIM         254
-out: 0
-END
-out: 1
-BEGIN SIM         255
+out: 1010
 END
