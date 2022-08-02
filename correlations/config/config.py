@@ -1,6 +1,8 @@
 import math
+from pickle import FALSE
 
 from scripts.python.errors import CLK_ERROR, DEL_ERROR, check_code
+from config.generate_inputs import gen_in
 import config.global_vars as gv
 
 def read_del(line):
@@ -11,7 +13,6 @@ def create_conf_file_v():
     gate_del = dict()
     clk = 'y'
     period = 0
-    full = 'y'
 
     file = "./config/config.conf"
 
@@ -21,7 +22,9 @@ def create_conf_file_v():
                 gv.new_simulations(int(line.split()[1]))
             
             elif line.startswith("full"):
-                full = line.split()[1]
+                f = line.split()[1]
+                if f == 'n':
+                    gv.new_full('n')
 
             elif line.startswith("clk"):
                 clk = line.split()[1]
@@ -55,17 +58,15 @@ def create_conf_file_v():
     if (gv.in_size + gv.rand_size) != len(in_del):
         check_code(DEL_ERROR)
 
-    write_config_v(full, in_del, gate_del, gv.simulations, clk, period, gv.in_size, gv.rand_size, gv.out_size)
+    write_config_v(in_del, gate_del, gv.simulations, clk, period, gv.in_size, gv.rand_size, gv.out_size)
 
-def write_config_v(full, in_del, gate_del, sim, clk, period, in_size, rand_size, out_size):
+def write_config_v(in_del, gate_del, sim, clk, period, in_size, rand_size, out_size):
     with open("./config/config.v", "a") as conf:
         conf.truncate(0)
 
         # config file for number of simulations
         r = int(math.sqrt(sim))
         conf.write("`define SIM " + str(r) + "\n")
-        if full == 'y':
-            conf.write("`define FULL\n")
         if clk == 'y':
             conf.write("`define CLK\n")
         conf.write("`define CLK_PERIOD " + str(period) + "\n")
@@ -100,3 +101,4 @@ def write_config_v(full, in_del, gate_del, sim, clk, period, in_size, rand_size,
 
 def config():
     create_conf_file_v()
+    gen_in()

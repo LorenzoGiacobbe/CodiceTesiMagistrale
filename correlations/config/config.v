@@ -1,19 +1,17 @@
-`define SIM 11
+`define SIM 24
 `define CLK
 `define CLK_PERIOD 5
-`define IN_SIZE 14
+`define IN_SIZE 24
 `define OUT_SIZE 4
 
 `ifdef DEL
   `define XNOR_DELAY #0.10
   `define NAND_DELAY #0.20
   `define XOR_DELAY #0.50
-  `define AND_DELAY #0.30
 `else
   `define XNOR_DELAY #0
   `define NAND_DELAY #0
   `define XOR_DELAY #0
-  `define AND_DELAY #0
 `endif
 
 `ifdef IN_DEL
@@ -31,6 +29,16 @@
   `define rand3 #0.00
   `define rand4 #0.00
   `define rand5 #0.00
+  `define rand6 #0.00
+  `define rand7 #0.00
+  `define rand8 #0.00
+  `define rand9 #0.00
+  `define rand10 #0.00
+  `define rand11 #0.00
+  `define rand12 #0.00
+  `define rand13 #0.00
+  `define rand14 #0.00
+  `define rand15 #0.00
 `else
   `define a0 #0
   `define a1 #0
@@ -46,4 +54,14 @@
   `define rand3 #0
   `define rand4 #0
   `define rand5 #0
+  `define rand6 #0
+  `define rand7 #0
+  `define rand8 #0
+  `define rand9 #0
+  `define rand10 #0
+  `define rand11 #0
+  `define rand12 #0
+  `define rand13 #0
+  `define rand14 #0
+  `define rand15 #0
 `endif

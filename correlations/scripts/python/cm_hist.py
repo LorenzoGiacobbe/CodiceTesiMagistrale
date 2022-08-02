@@ -70,15 +70,19 @@ def create_toggles_hist(toggles):
 
 def create_il(in_len):
     il = list()
-    len = 0
     f = '0' + str(2*in_len) + 'b'
     
-    with open("./logs/inputs.txt", "r") as inputs:
-        for line in inputs:
-            len += 1
-            num = int(line.split()[0])*pow(2, in_len)+int(line.split()[1])
+    with open("./config/inputs.dat", "r") as inputs:
+        pre = inputs.readline()
+        post = inputs.readline()
+        while (pre) and (post):
+            num = int(pre)*pow(2, in_len)+int(post)
             s = format(num, f)
+            # if(int(pre) < 1):
+            #     print(pre.strip() + '\t' + post.strip() + '\t' + s)
             il.append(s)
+            pre = inputs.readline()
+            post = inputs.readline()
 
     return il
 

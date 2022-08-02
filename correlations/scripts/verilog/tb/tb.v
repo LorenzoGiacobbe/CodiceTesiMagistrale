@@ -2,6 +2,7 @@
 `include "./config/config.v"
 
 `timescale 1ns/1fs
+`define NULL 0
 
 module tb;
 
@@ -22,48 +23,52 @@ integer i;
 integer j;
 integer sim;
 integer inputs;
+reg [`IN_SIZE-1:0] pre_data;
+reg [`IN_SIZE-1:0] post_data;
+
+// da vedere se posso cancellarlo
+integer scan_file;
+integer check;
 
 // simulation	
 initial begin
 
 	$dumpfile("./scripts/verilog/vcd/correlation.vcd");
 	$dumpvars(0, tb);
-	
-	inputs = $fopen("./logs/inputs.txt", "w");
-	//if(inputs) $display("inputs opened");
 
 	VPWR = 1'b1;
 	VGND = 1'b0;
 	sim = 0;
 
-	$monitor("out: %b", out);
+    // check = $fopen("./scripts/prove/check.dat", "w");
+    // if (check == `NULL) begin
+    //     $display("check.dat handle was NULL");
+    //     $finish;
+    // end
 
-	`ifdef FULL
-		for (i = 0; i < `SIM; i++) begin
+    inputs = $fopen("./config/inputs.dat", "r");
+    if (inputs == `NULL) begin
+        $display("inputs.dat handle was NULL");
+        $finish;
+    end 
+    else begin
+        $monitor("out: %b", out);
+        for (i = 0; i < `SIM; i++) begin
 			for (j = 0; j < `SIM; j++) begin
-				$fwrite(inputs, "%d\t%d\n", i, j);
-				in = i; #(`CLK_PERIOD);
-				$write("BEGIN SIM %d\n", sim);
-				sim++;
-				in = j; #(`CLK_PERIOD);
-				$write("END\n");
-			end
-		end
-	`else
-		for (i = 0; i < `SIM; i++) begin
-			for (j = 0; j < `SIM; j++) begin
-				in = {$random} % 2**`IN_SIZE;
-				$fwrite(inputs, "%d\t", in);
-				#(`CLK_PERIOD);
-				$write("BEGIN SIM %d\n", sim);
-				sim++;
-				in = {$random} % 2**`IN_SIZE;
-				$fwrite(inputs, "%d\n", in);
-				#(`CLK_PERIOD);
-				$write("END\n");
-			end
-		end
-	`endif
+                scan_file = $fscanf(inputs, "%d\n%d\n", pre_data, post_data); 
+                if (!$feof(inputs)) begin
+                    // here i have read the inputs input
+                    in = pre_data;
+                    #(`CLK_PERIOD);
+                    $write("BEGIN SIM %d\n", sim);
+                    sim++;
+                    in = post_data;
+                    #(`CLK_PERIOD);
+                    $write("END\n");
+                end
+            end
+        end
+    end
 
 	$fclose(inputs);
 

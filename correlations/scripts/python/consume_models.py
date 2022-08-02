@@ -14,10 +14,11 @@ def consume_model(post):
         l = list()
         result.append(l)
 
-    for i in range(len(post)):
+    for i in range(gv.simulations):
         for input in range(gv.in_size):
             # consume model
             result[input].append(hw(post[input][i]))
+
     return result
 
 def consume_model_pre_post(pre, post):
@@ -27,8 +28,9 @@ def consume_model_pre_post(pre, post):
         l = list()
         result.append(l)
 
-    for i in range(len(post)):
+    for i in range(gv.simulations):
         for input in range(gv.in_size):
             # consume model
             result[input].append(hd(pre[input][i], post[input][i]))
+
     return result
