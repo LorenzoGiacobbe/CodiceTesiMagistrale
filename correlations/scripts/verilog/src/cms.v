@@ -3,7 +3,7 @@
 
 `timescale 1ns / 1fs
 
-module gadget_robust (VGND,
+module cms (VGND,
     VPWR,
     clk,
     in,
