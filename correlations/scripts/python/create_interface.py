@@ -5,7 +5,7 @@ import config.global_vars as gv
 def read_del_name(line):
     return line.split()[1]
 
-def create_if(module_name):
+def create_if(module_name, conf_file):
     fn = "./scripts/verilog/interface/interface.v"
     with open(fn, "w") as interface:
         interface.write('`include "./scripts/verilog/src/' + module_name + '.v"\n')
@@ -18,7 +18,7 @@ def create_if(module_name):
         interface.write('\twire [`IN_SIZE-1:0] in_del;\n\n')
 
         # loop to insert delays in inputs
-        with open("./config/config.conf", "r") as conf:
+        with open(conf_file, "r") as conf:
             d = gv.in_size + gv.rand_size
             for line in conf:
                 if line.startswith("input"):

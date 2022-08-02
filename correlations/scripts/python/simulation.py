@@ -2,10 +2,10 @@ import subprocess
 from scripts.python.create_interface import create_if
 
 # gadget simulation
-def simulate(module_name):
+def simulate(module_name, conf_file):
 	tb = "./scripts/verilog/tb/tb.v"
 
-	create_if(module_name)
+	create_if(module_name, conf_file)
 
 	log = "./logs/vvp_log.log"
 	log_del = "./logs/vvp_log_del.log"

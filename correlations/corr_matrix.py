@@ -17,11 +17,12 @@ if __name__ == "__main__":
     start_time = time.time()
 
     module = sys.argv[1]
-    spreadsheet = sys.argv[2]
+    conf_file = "./config/" + sys.argv[2]
+    spreadsheet = sys.argv[3]
 
-    config()
+    config(conf_file)
 
-    vvp_logs = simulate(module)
+    vvp_logs = simulate(module, conf_file)
 
     data = create_cm_hist(vvp_logs)
     print(data[0])

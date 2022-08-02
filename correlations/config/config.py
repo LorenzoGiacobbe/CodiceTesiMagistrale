@@ -8,13 +8,11 @@ import config.global_vars as gv
 def read_del(line):
     return line.split()[1], line.split()[2]
 
-def create_conf_file_v():
+def create_conf_file_v(file):
     in_del = dict()
     gate_del = dict()
     clk = 'y'
     period = 0
-
-    file = "./config/config.conf"
 
     with open(file) as conf:
         for line in conf:
@@ -61,7 +59,8 @@ def create_conf_file_v():
     write_config_v(in_del, gate_del, gv.simulations, clk, period, gv.in_size, gv.rand_size, gv.out_size)
 
 def write_config_v(in_del, gate_del, sim, clk, period, in_size, rand_size, out_size):
-    with open("./config/config.v", "a") as conf:
+    file = "./config/config.v"
+    with open(file, "a") as conf:
         conf.truncate(0)
 
         # config file for number of simulations
@@ -99,6 +98,6 @@ def write_config_v(in_del, gate_del, sim, clk, period, in_size, rand_size, out_s
             conf.write(string)
         conf.write("`endif\n")
 
-def config():
-    create_conf_file_v()
+def config(conf_file):
+    create_conf_file_v(conf_file)
     gen_in()
