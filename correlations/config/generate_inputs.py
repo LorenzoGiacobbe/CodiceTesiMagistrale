@@ -1,13 +1,14 @@
 import os
 import config.global_vars as gv
 
-# generates the random inputs that are then used for the simulation
 def gen_in():
     with open("./config/inputs.dat", "a") as inputs:
+        # potential old inputs are truncated
         inputs.truncate(0)
 
-        # generate one input per line -> 2*(gv.simulations)
-        #       2* because it has to generate one line for pre and one for post
+        # the full parameter has two possible values
+        #   - y: all the possible input combinations have to be simulated
+        #   - n: a subset of all simulations is simulated -> the inputs are generated randomically
         if(gv.full == 'y'):
             sim = (gv.in_size + gv.rand_size)**2
             for i in range(0, sim):
@@ -19,6 +20,3 @@ def gen_in():
             for i in range(0, 2*(gv.simulations)):
                 rand = int.from_bytes(os.urandom(bytes_to_gen), "big")
                 inputs.write(str(rand) + "\n")
-
-
-    return

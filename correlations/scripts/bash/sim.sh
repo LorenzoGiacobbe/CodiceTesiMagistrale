@@ -1,34 +1,26 @@
 #!/bin/bash
 
-# HELP FUNCTION
-Help()
-{
-    echo "Syntax: sim [-h|g|d|D]"
-	echo "Options:"
-	echo "h	display help"
-	echo "d delays on gates"
-	echo "D delays on gates and inputs"
-	echo "t name of testbench to execute"
-	echo "p	relative path (default '.')"
-    echo
-} 
-
-# SET VARIABLES
+# variables initialization
 TB=''
+
+# DEL has three possible values:
+#	- 0: gadget without delays is simulated
+#	- 1: gadget with only gate delays is simulated
+#	- 2: gagdet with gate and input delays is simulated
 DEL=0
 
-# get the options and their arguments
+# arguments retrieval
 while getopts ":dDt:" option; do
     case $option in
 	d)
 	    DEL=1;;
-	D)
+	D)	
 	    DEL=2;;
-        t)
-            TB=$OPTARG;; 
-        \?) # Invalid option
-            echo "Error: Invalid option"
-            exit;;
+	t)
+		TB=$OPTARG;; 
+	\?) # Invalid option
+		echo "Error: Invalid option"
+		exit;;
    esac
 done
 
@@ -36,17 +28,14 @@ done
 if [ $DEL -eq 0 ]; then
 	VVP="./scripts/verilog/vvp/correlation.vvp"
 	iverilog -o $VVP $TB
-	# echo "simulating $VVP ..."
 	vvp $VVP > ./logs/vvp_log.log
 elif [ $DEL -eq 1 ]; then 
 	VVP="./scripts/verilog/vvp/correlation_del.vvp"
 	iverilog -o $VVP -DDEL $TB
-	# echo "simulating $VVP ..."
 	vvp $VVP > ./logs/vvp_log_del.log
 elif [ $DEL -eq 2 ]; then
 	VVP="./scripts/verilog/vvp/correlation_in_del.vvp"
 	iverilog -o $VVP -DDEL -DIN_DEL $TB
-	# echo "simulating $VVP ..."
 	vvp $VVP > ./logs/vvp_log_in_del.log
 fi
 

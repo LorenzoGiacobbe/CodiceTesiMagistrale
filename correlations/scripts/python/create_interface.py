@@ -1,10 +1,13 @@
 from scripts.python.errors import del_error
 import config.global_vars as gv
 
-
+# auxiliary function used to read the name of a delay from the configuration file
 def read_del_name(line):
     return line.split()[1]
 
+# creates the general interface taking the values from the configuration file
+# permits to automatically execute every gadget with a specific structure
+#   -> adds the necessary abstraction level
 def create_if(module_name, conf_file):
     fn = "./scripts/verilog/interface/interface.v"
     with open(fn, "w") as interface:

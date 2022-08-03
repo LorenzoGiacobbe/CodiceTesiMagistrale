@@ -1,6 +1,8 @@
 import pandas as pd
 import config.global_vars as gv
 
+# takes as inputs the two lists between wich the correlation needs to be calculated
+# (i.e. the toggle list and the list generated through sel_func and consume_model)
 def pearsons_correlation(toggles, inputs):
     df = pd.concat([pd.DataFrame(inputs), pd.DataFrame(toggles[0])], axis=1)
     corr_table = df.corr(method='pearson')
@@ -19,10 +21,10 @@ def correlations(toggles, inputs):
         l = list()
         corr.append(l)
 
-        # contiene per input i le correlazioni per i 3 ritardi
-        # correlations[0] -> corr senza ritardi
-        # correlations[1] -> corr gate delay
-        # correlations[2] -> corr gate + input delay
+        # contains for input i the correlations for the 3 delays
+        # correlations[0] -> correlation without delays
+        # correlations[1] -> correlation with gate delay
+        # correlations[2] -> correlation with gate and input delay
         correlations = pearsons_correlation(toggles, inputs[i])
         for j in range(3):
             corr[i].append(correlations[j].iat[0, 1])

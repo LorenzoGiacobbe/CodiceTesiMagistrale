@@ -1,5 +1,8 @@
 import config.global_vars as gv
 
+# selection function that can be changed by the user:
+# takes as input the input list read from input.dat
+# returns a list of the selected post values
 def sel_func(il):
     result = list()
 
@@ -9,13 +12,14 @@ def sel_func(il):
 
     for i in range(len(il)):
         for input in range(gv.in_size):
-            # selection function
             post = int(il[i][(gv.in_size + gv.rand_size) + input])
-            # consume model
             result[input].append(post)
 
     return result
 
+# selection function that can be changed by the user:
+# takes as input the input list read from input.dat
+# returns a list of the selected pre and post values
 def sel_func_pre_post(il):
     pre = list()
     post = list()
@@ -30,7 +34,6 @@ def sel_func_pre_post(il):
 
     for i in range(len(il)):
         for input in range(gv.in_size):
-            # selection function
             pre[input].append(int(il[i][input]))
             post[input].append(int(il[i][(gv.in_size + gv.rand_size) + input]))
 
