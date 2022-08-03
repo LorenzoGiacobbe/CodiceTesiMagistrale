@@ -764,6 +764,3 @@ out: 1
 BEGIN SIM         254
 out: 0
 END
-out: 1
-BEGIN SIM         255
-END

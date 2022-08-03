@@ -1,72 +1,19 @@
-`include "./libs/primitives.v"
-`include "./libs/sky130_fd_sc_hd.v"
-
-`include "./config/config.v"
+`include "/home/lorenzo/Git/CodiceTesiMagistrale/correlations/libs/primitives.v"
+`include "/home/lorenzo/Git/CodiceTesiMagistrale/correlations/libs/sky130_fd_sc_hd.v"
 
 `timescale 1ns / 1fs
 
-module gadget_robust (VGND,
+module cms (VGND,
     VPWR,
-    a0,
-    a1,
-    a2,
-    a3,
-    b0,
-    b1,
-    b2,
-    b3,
-    c0,
-    c1,
-    c2,
-    c3,
-    clock,
-    rand0,
-    rand1,
-    rand10,
-    rand11,
-    rand12,
-    rand13,
-    rand14,
-    rand15,
-    rand2,
-    rand3,
-    rand4,
-    rand5,
-    rand6,
-    rand7,
-    rand8,
-    rand9);
+    clk,
+    in,
+    out);
+
  input VGND;
  input VPWR;
- input a0;
- input a1;
- input a2;
- input a3;
- input b0;
- input b1;
- input b2;
- input b3;
- output c0;
- output c1;
- output c2;
- output c3;
- input clock;
- input rand0;
- input rand1;
- input rand10;
- input rand11;
- input rand12;
- input rand13;
- input rand14;
- input rand15;
- input rand2;
- input rand3;
- input rand4;
- input rand5;
- input rand6;
- input rand7;
- input rand8;
- input rand9;
+ input clk;
+ input [23:0] in;
+ output [3:0] out;
 
  wire _00_;
  wire _01_;
@@ -1332,151 +1279,151 @@ module gadget_robust (VGND,
     .VPB(VPWR),
     .VPWR(VPWR),
     .Q(c33pr));
-   sky130_fd_sc_hd__clkbuf_2 input1 (.A(a0),
+   sky130_fd_sc_hd__clkbuf_2 input1 (.A(in[23]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net1));
-   sky130_fd_sc_hd__clkbuf_1 input10 (.A(rand0),
+   sky130_fd_sc_hd__clkbuf_1 input10 (.A(in[15]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net10));
-   sky130_fd_sc_hd__clkbuf_1 input11 (.A(rand1),
+   sky130_fd_sc_hd__clkbuf_1 input11 (.A(in[14]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net11));
-   sky130_fd_sc_hd__clkbuf_1 input12 (.A(rand10),
+   sky130_fd_sc_hd__clkbuf_1 input12 (.A(in[5]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net12));
-   sky130_fd_sc_hd__clkbuf_1 input13 (.A(rand11),
+   sky130_fd_sc_hd__clkbuf_1 input13 (.A(in[4]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net13));
-   sky130_fd_sc_hd__clkbuf_1 input14 (.A(rand12),
+   sky130_fd_sc_hd__clkbuf_1 input14 (.A(in[3]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net14));
-   sky130_fd_sc_hd__clkbuf_1 input15 (.A(rand13),
+   sky130_fd_sc_hd__clkbuf_1 input15 (.A(in[2]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net15));
-   sky130_fd_sc_hd__clkbuf_1 input16 (.A(rand14),
+   sky130_fd_sc_hd__clkbuf_1 input16 (.A(in[1]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net16));
-   sky130_fd_sc_hd__clkbuf_1 input17 (.A(rand15),
+   sky130_fd_sc_hd__clkbuf_1 input17 (.A(in[0]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net17));
-   sky130_fd_sc_hd__clkbuf_1 input18 (.A(rand2),
+   sky130_fd_sc_hd__clkbuf_1 input18 (.A(in[13]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net18));
-   sky130_fd_sc_hd__clkbuf_1 input19 (.A(rand3),
+   sky130_fd_sc_hd__clkbuf_1 input19 (.A(in[12]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net19));
-   sky130_fd_sc_hd__dlymetal6s2s_1 input2 (.A(a1),
+   sky130_fd_sc_hd__dlymetal6s2s_1 input2 (.A(in[22]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net2));
-   sky130_fd_sc_hd__clkbuf_1 input20 (.A(rand4),
+   sky130_fd_sc_hd__clkbuf_1 input20 (.A(in[11]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net20));
-   sky130_fd_sc_hd__clkbuf_1 input21 (.A(rand5),
+   sky130_fd_sc_hd__clkbuf_1 input21 (.A(in[10]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net21));
-   sky130_fd_sc_hd__clkbuf_1 input22 (.A(rand6),
+   sky130_fd_sc_hd__clkbuf_1 input22 (.A(in[9]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net22));
-   sky130_fd_sc_hd__clkbuf_1 input23 (.A(rand7),
+   sky130_fd_sc_hd__clkbuf_1 input23 (.A(in[8]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net23));
-   sky130_fd_sc_hd__clkbuf_1 input24 (.A(rand8),
+   sky130_fd_sc_hd__clkbuf_1 input24 (.A(in[7]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net24));
-   sky130_fd_sc_hd__clkbuf_1 input25 (.A(rand9),
+   sky130_fd_sc_hd__clkbuf_1 input25 (.A(in[6]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net25));
-   sky130_fd_sc_hd__dlymetal6s2s_1 input3 (.A(a2),
+   sky130_fd_sc_hd__dlymetal6s2s_1 input3 (.A(in[21]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net3));
-   sky130_fd_sc_hd__dlymetal6s2s_1 input4 (.A(a3),
+   sky130_fd_sc_hd__dlymetal6s2s_1 input4 (.A(in[20]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net4));
-   sky130_fd_sc_hd__dlymetal6s2s_1 input5 (.A(b0),
+   sky130_fd_sc_hd__dlymetal6s2s_1 input5 (.A(in[19]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net5));
-   sky130_fd_sc_hd__clkbuf_2 input6 (.A(b1),
+   sky130_fd_sc_hd__clkbuf_2 input6 (.A(in[18]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net6));
-   sky130_fd_sc_hd__clkbuf_2 input7 (.A(b2),
+   sky130_fd_sc_hd__clkbuf_2 input7 (.A(in[17]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net7));
-   sky130_fd_sc_hd__dlymetal6s2s_1 input8 (.A(b3),
+   sky130_fd_sc_hd__dlymetal6s2s_1 input8 (.A(in[16]),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
     .X(net8));
-   sky130_fd_sc_hd__buf_4 input9 (.A(clock),
+   sky130_fd_sc_hd__buf_4 input9 (.A(clk),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
@@ -1487,23 +1434,23 @@ module gadget_robust (VGND,
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
-    .X(c0));
+    .X(out[3]));
    sky130_fd_sc_hd__buf_2 output27 (.A(net27),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
-    .X(c1));
+    .X(out[2]));
    sky130_fd_sc_hd__buf_2 output28 (.A(net28),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
-    .X(c2));
+    .X(out[1]));
    sky130_fd_sc_hd__buf_2 output29 (.A(net29),
     .VGND(VGND),
     .VNB(VGND),
     .VPB(VPWR),
     .VPWR(VPWR),
-    .X(c3));
+    .X(out[0]));
 endmodule

@@ -1,25 +1,47 @@
 import math
 
+from scripts.python.errors import CLK_ERROR, DEL_ERROR, check_code
+from config.generate_inputs import gen_in
+import config.global_vars as gv
+
+# auxiliary function reading to help reading the configuration file
 def read_del(line):
     return line.split()[1], line.split()[2]
 
-def sort_dict(d):
-    d_sort = dict()
-    keys = sorted(d, key=d.get)
-
-    for k in keys:
-        d_sort[k] = d[k]
-
-    return d_sort
-
-def read_conf_file(file):
+def create_conf_file_v(file):
     in_del = dict()
     gate_del = dict()
-    simulations = 0
+    out_size = 0
+    clk = 'y'
+    period = 0
 
+    # reads the configuration file and initializes all needed values
     with open(file) as conf:
         for line in conf:
-            if line.startswith("input"):
+            if line.startswith("sim"):
+                gv.new_simulations(int(line.split()[1]))
+            
+            elif line.startswith("full"):
+                f = line.split()[1]
+                if f == 'n':
+                    gv.new_full('n')
+
+            elif line.startswith("clk"):
+                clk = line.split()[1]
+
+            elif line.startswith("period"):
+                period = int(line.split()[1])
+
+            elif line.startswith("in_size"):
+                gv.new_in_size(int(line.split()[1]))
+
+            elif line.startswith("rand_size"):
+                gv.new_rand_size(int(line.split()[1]))
+
+            elif line.startswith("out_size"):
+                out_size = int(line.split()[1])
+
+            elif line.startswith("input"):
                 data = read_del(line)
                 in_del[data[0]] = data[1]
 
@@ -27,27 +49,36 @@ def read_conf_file(file):
                 data = read_del(line)
                 gate_del[data[0]] = data[1]
 
-            elif line.startswith("sim"):
-                simulations = int(line.split()[1])
+    if gv.simulations == 0:
+        gv.new_simulations(len(in_del)**2)
 
+    if clk == 0:
+        check_code(CLK_ERROR)
 
+    if (gv.in_size + gv.rand_size) != len(in_del):
+        check_code(DEL_ERROR)
 
-    if simulations == 0:
-        simulations = len(in_del)**2
+    # uses the values read before to write the verilog configuration file
+    # containing all the definitions needed for the simulations
+    write_config_v(in_del, gate_del, gv.simulations, clk, period, gv.in_size, gv.rand_size, out_size)
 
-    return sort_dict(in_del), sort_dict(gate_del), simulations
-
-def write_config_v(file, in_del, gate_del, sim):
-    with open("./config/config.v", "a") as conf:
+def write_config_v(in_del, gate_del, sim, clk, period, in_size, rand_size, out_size):
+    file = "./config/config.v"
+    with open(file, "a") as conf:
         conf.truncate(0)
 
-        # config file for number of simulations
+        # write needed defines on the config.v file
         r = int(math.sqrt(sim))
         conf.write("`define SIM " + str(r) + "\n")
+        if clk == 'y':
+            conf.write("`define CLK\n")
+        conf.write("`define CLK_PERIOD " + str(period) + "\n")
+        conf.write("`define IN_SIZE " + str(in_size+rand_size) + "\n")
+        conf.write("`define OUT_SIZE " + str(out_size) + "\n")
 
         conf.write("\n")
 
-        # config file for gate delays
+        # section of the config.v file containing the gate delays
         conf.write("`ifdef DEL\n")
         for i in gate_del:
             string = "  `define " + i + " #" + gate_del[i] + "\n"
@@ -60,8 +91,8 @@ def write_config_v(file, in_del, gate_del, sim):
 
         conf.write("\n")
 
-        #config file for input delays
-        conf.write("`ifdef DEL\n")
+        # section of the config.v file containing the input delays
+        conf.write("`ifdef IN_DEL\n")
         for i in in_del:
             string = "  `define " + i + " #" + in_del[i] + "\n"
             conf.write(string)
@@ -71,6 +102,8 @@ def write_config_v(file, in_del, gate_del, sim):
             conf.write(string)
         conf.write("`endif\n")
 
-def config(file):
-    data = read_conf_file(file)
-    write_config_v(file, data[0], data[1], data[2])
+def config(conf_file):
+    # the configuration file is read and the config.v file generated
+    create_conf_file_v(conf_file)
+    # based on the full parameter of the configuration file the inputs are generated
+    gen_in()

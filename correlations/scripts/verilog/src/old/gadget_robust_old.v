@@ -1,7 +1,5 @@
-`include "./libs/primitives.v"
-`include "./libs/sky130_fd_sc_hd.v"
-
-`include "./config/config.v"
+`include "/home/lorenzo/gadget_simulation/libs/primitives.v"
+`include "/home/lorenzo/gadget_simulation/libs/sky130_fd_sc_hd.v"
 
 `timescale 1ns / 1fs
 

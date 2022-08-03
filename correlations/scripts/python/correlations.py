@@ -1,5 +1,8 @@
 import pandas as pd
+import config.global_vars as gv
 
+# takes as inputs the two lists between wich the correlation needs to be calculated
+# (i.e. the toggle list and the list generated through sel_func and consume_model)
 def pearsons_correlation(toggles, inputs):
     df = pd.concat([pd.DataFrame(inputs), pd.DataFrame(toggles[0])], axis=1)
     corr_table = df.corr(method='pearson')
@@ -13,17 +16,17 @@ def pearsons_correlation(toggles, inputs):
     return corr_table, corr_table_del, corr_table_in_del
 
 def correlations(toggles, inputs):
-    corr_a = list()
-    corr_b = list()
-    corr_ab = list()
+    corr = list()
+    for i in range(gv.in_size):
+        l = list()
+        corr.append(l)
 
-    correlations_a  = pearsons_correlation(toggles, inputs[0])
-    correlations_b  = pearsons_correlation(toggles, inputs[1])
-    correlations_ab = pearsons_correlation(toggles, inputs[2])
+        # contains for input i the correlations for the 3 delays
+        # correlations[0] -> correlation without delays
+        # correlations[1] -> correlation with gate delay
+        # correlations[2] -> correlation with gate and input delay
+        correlations = pearsons_correlation(toggles, inputs[i])
+        for j in range(3):
+            corr[i].append(correlations[j].iat[0, 1])
 
-    for i in range(3):
-        corr_a.append(correlations_a[i].iat[0, 1])
-        corr_b.append(correlations_b[i].iat[0, 1])
-        corr_ab.append(correlations_ab[i].iat[0, 1])
-
-    return corr_a, corr_b, corr_ab
+    return corr
